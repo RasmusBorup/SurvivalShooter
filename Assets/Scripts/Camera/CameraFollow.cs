@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour
 			foreach (GameObject player in players) 
 			{
 				Debug.Log("Found " + players.Length + " players");
-				if(player.networkView.isMine)
+				if(player.GetComponent<NetworkView>().isMine)
 				{
 					target = player.GetComponent<Transform>();
 					offset = transform.position - target.position;

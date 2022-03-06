@@ -49,11 +49,11 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
-		if (networkView.isMine) 
+		if (GetComponent<NetworkView>().isMine) 
 		{
 			healthText.text = currentHealth + "/" + startingHealth;
 		}
-        if(damaged && networkView.isMine)
+        if(damaged && GetComponent<NetworkView>().isMine)
         {
             damageImage.color = flashColour;
         }
@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-		if (networkView.isMine) 
+		if (GetComponent<NetworkView>().isMine) 
 		{
 			healthSlider.value = currentHealth;
 		}

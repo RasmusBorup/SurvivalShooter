@@ -23,7 +23,7 @@ public class PauseManager : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.Escape))
 	   	{
-            networkView.RPC("PauseToggle", RPCMode.All);
+            GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
 		}
 	}
 
@@ -68,18 +68,18 @@ public class PauseManager : MonoBehaviour
 
 	public void Resume()
     {
-        networkView.RPC("PauseToggle", RPCMode.All);
+        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
 	}
 
 	public void QuitToMain()
 	{
-        networkView.RPC("PauseToggle", RPCMode.All);
+        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
         Network.Disconnect();
 	}
 
 	public void QuitToDesktop()
     {
-        networkView.RPC("PauseToggle", RPCMode.All);
+        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
         Network.Disconnect();
 		Application.Quit ();
 	}

@@ -6,13 +6,13 @@ public class EnemyMovement : MonoBehaviour
     Transform playerTransform;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
-    NavMeshAgent nav;
+    UnityEngine.AI.NavMeshAgent nav;
 
 
     void Awake ()
 	{
 		enemyHealth = GetComponent <EnemyHealth> ();
-		nav = GetComponent <NavMeshAgent> ();
+		nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
     }
 
 	void Start()

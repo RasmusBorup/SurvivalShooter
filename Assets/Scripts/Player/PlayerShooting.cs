@@ -33,14 +33,14 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0 && networkView.isMine)
+		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0 && GetComponent<NetworkView>().isMine)
         {
-			networkView.RPC ("Shoot", RPCMode.All);
+			GetComponent<NetworkView>().RPC ("Shoot", RPCMode.All);
         }
 
-        if(timer >= timeBetweenBullets * effectsDisplayTime && networkView.isMine)
+        if(timer >= timeBetweenBullets * effectsDisplayTime && GetComponent<NetworkView>().isMine)
         {
-            networkView.RPC ("DisableEffects", RPCMode.All);
+            GetComponent<NetworkView>().RPC ("DisableEffects", RPCMode.All);
         }
     }
 

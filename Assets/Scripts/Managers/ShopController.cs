@@ -50,7 +50,7 @@ public class ShopController : MonoBehaviour
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             foreach(GameObject p in players)
             {
-                if(p.networkView.isMine)
+                if(p.GetComponent<NetworkView>().isMine)
                 {
                     player = p;
                     playerHealth = player.GetComponent<PlayerHealth> ();

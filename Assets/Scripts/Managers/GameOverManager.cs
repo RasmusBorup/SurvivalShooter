@@ -51,7 +51,7 @@ public class GameOverManager : MonoBehaviour
 			anim.SetTrigger("GameOver");	
 			if(Input.GetKeyDown (KeyCode.R))
 			{
-                networkView.RPC("RestartLevel", RPCMode.All);
+                GetComponent<NetworkView>().RPC("RestartLevel", RPCMode.All);
 			}
 			if(Input.GetKeyDown(KeyCode.Q))
 			{
@@ -65,9 +65,9 @@ public class GameOverManager : MonoBehaviour
     {
         foreach (GameObject player in players)
         {
-            if(player.networkView.isMine)
+            if(player.GetComponent<NetworkView>().isMine)
             {
-                Network.RemoveRPCs(player.networkView.viewID);
+                Network.RemoveRPCs(player.GetComponent<NetworkView>().viewID);
             }
         }
         Application.LoadLevel(Application.loadedLevel);

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (networkView.isMine) {
+		if (GetComponent<NetworkView>().isMine) {
 			float horizontal = Input.GetAxisRaw ("Horizontal");
 			float vertical = Input.GetAxisRaw ("Vertical");
 			bool mouseMoveDown = Input.GetMouseButton (1);

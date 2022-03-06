@@ -134,7 +134,7 @@ public class EnemyManager : MonoBehaviour
 			if(everythingKilled)
 			{
 				yield return new WaitForSeconds(timeBetweenWaves);
-				networkView.RPC ("AnimateNight", RPCMode.All);
+				GetComponent<NetworkView>().RPC ("AnimateNight", RPCMode.All);
 				yield return new WaitForSeconds(nightAnimationTime);
 				for(int i = 0; i < amount; i++)
 				{
@@ -143,7 +143,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 if(Network.isServer)
                 {
-                    networkView.RPC("UpdateNight", RPCMode.All);
+                    GetComponent<NetworkView>().RPC("UpdateNight", RPCMode.All);
                 }
 			}
 		}
