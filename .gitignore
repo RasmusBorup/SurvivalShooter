@@ -236,6 +236,8 @@ _Pvt_Extensions
 .fake/
 
 
+Library/**
+Library/*
 Library/metadata/**
 Library/ShaderCache/**
 Temp/**
