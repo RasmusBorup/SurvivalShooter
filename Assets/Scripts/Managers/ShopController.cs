@@ -47,19 +47,11 @@ public class ShopController : MonoBehaviour
 	{
 		if (!playerFound) 
 		{
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach(GameObject p in players)
-            {
-                if(p.GetComponent<NetworkView>().isMine)
-                {
-                    player = p;
-                    playerHealth = player.GetComponent<PlayerHealth> ();
-                    playerShooting = player.GetComponentInChildren<PlayerShooting> ();
-                    playerInRange = false;
-                    playerFound = true;
-                }
-            }
-
+            player = GameObject.FindGameObjectWithTag("Player");
+			playerHealth = player.GetComponent<PlayerHealth> ();
+			playerShooting = player.GetComponentInChildren<PlayerShooting> ();
+			playerInRange = false;
+			playerFound = true;
 		}
 		if (playerHealth.currentHealth <= 0) {
 			playerInRange = false;
@@ -70,7 +62,6 @@ public class ShopController : MonoBehaviour
 				StartCoroutine("ShowShop");
 			}
 		}
-
 	}
 
 	void FixedUpdate()

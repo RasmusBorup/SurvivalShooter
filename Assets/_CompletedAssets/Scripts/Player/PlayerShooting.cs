@@ -31,6 +31,7 @@ namespace CompleteProject
             gunLine = GetComponent <LineRenderer> ();
             gunAudio = GetComponent<AudioSource> ();
             gunLight = GetComponent<Light> ();
+            shootRay = new Ray(); // Added as test
         }
 
 

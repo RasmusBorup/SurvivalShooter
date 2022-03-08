@@ -11,6 +11,8 @@ public class EnemyMovement : MonoBehaviour
 
     void Awake ()
 	{
+		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;
+		playerHealth = playerTransform.GetComponent <PlayerHealth> ();
 		enemyHealth = GetComponent <EnemyHealth> ();
 		nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
     }
@@ -22,15 +24,9 @@ public class EnemyMovement : MonoBehaviour
 
     void Update ()
 	{
-		playerTransform = gameObject.GetComponentInChildren<EnemyFocusManager>().FindClosestPlayer().transform;
-		playerHealth = playerTransform.GetComponent <PlayerHealth> ();
-
-        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
-        {
+        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {
             nav.SetDestination (playerTransform.position);
-        }
-        else
-        {
+        } else {
             nav.enabled = false;
         }
     }

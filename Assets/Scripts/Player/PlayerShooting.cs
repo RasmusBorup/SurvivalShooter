@@ -26,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
+        shootRay = new Ray();
     }
 
 
@@ -33,48 +34,23 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0 && GetComponent<NetworkView>().isMine)
+		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-			GetComponent<NetworkView>().RPC ("Shoot", RPCMode.All);
+			Shoot();
         }
 
-        if(timer >= timeBetweenBullets * effectsDisplayTime && GetComponent<NetworkView>().isMine)
+        if(timer >= timeBetweenBullets * effectsDisplayTime)
         {
-            GetComponent<NetworkView>().RPC ("DisableEffects", RPCMode.All);
-        }
-    }
-
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-        if (stream.isWriting) 
-        {
-            int syncDamage = damagePerShot;
-            float syncFireRate = timeBetweenBullets;
-            
-            stream.Serialize(ref syncDamage);
-            stream.Serialize(ref syncFireRate);
-        } 
-        else 
-        {
-            int syncDamage = 0;
-            float syncFireRate = 0;
-
-            stream.Serialize(ref syncDamage);
-            stream.Serialize(ref syncFireRate);
-
-            damagePerShot = syncDamage;
-            timeBetweenBullets = syncFireRate;
+            DisableEffects();
         }
     }
 
-	[RPC]
     public void DisableEffects ()
     {
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
 
-	[RPC]
     void Shoot ()
     {
         timer = 0f;

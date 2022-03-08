@@ -55,47 +55,41 @@ public class EnemyManager : MonoBehaviour
 		GameObject nightImage = GameObject.Find ("NightImage");
 		if(nightImage)
 		{
-			Debug.Log("NightImage Found");
 			anim = nightImage.GetComponent<Animator> ();
 		}
-		if(anim)
-			Debug.Log("Animator Found");
-		if (Network.isServer) 
-		{
-			StartCoroutine (Waves1());
-			StartCoroutine (Waves2());
-			StartCoroutine (Waves3 ());
 
-			gameOver = false;
-		}
+		StartCoroutine (Waves1());
+		StartCoroutine (Waves2());
+		StartCoroutine (Waves3 ());
+
+		gameOver = false;
     }
 
 	void Update()
 	{
-		if (Network.isServer) 
+		if (GameObject.FindGameObjectsWithTag ("Enemy").Length == 0) 
 		{
-			if (GameObject.FindGameObjectsWithTag ("Enemy").Length == 0) 
-            {
-				everythingKilled = true;
-			}
-            else 
-            {
-				everythingKilled = false;
-			}
+			everythingKilled = true;
 		}
+		else 
+		{
+			everythingKilled = false;
+		}
+		
         gameOver = GameObject.Find("GameOver").GetComponent<GameOverManager>().gameOver;
 	}
 
     void SpawnEnemy1 ()
     {
-//        if(gameOver)
-//        {
-//            return;
-//        }
+       if(gameOver)
+       {
+           return;
+       }
 
         int spawnPointIndex1 = Random.Range (0, spawnPoints1.Length);
+		Instantiate (enemy1, spawnPoints1[spawnPointIndex1].position, spawnPoints1[spawnPointIndex1].rotation);
 
-		Network.Instantiate (enemy1, spawnPoints1[spawnPointIndex1].position, spawnPoints1[spawnPointIndex1].rotation, 0);
+		// Network.Instantiate (enemy1, spawnPoints1[spawnPointIndex1].position, spawnPoints1[spawnPointIndex1].rotation, 0);
     }
 	
 	void SpawnEnemy2 ()
@@ -107,7 +101,7 @@ public class EnemyManager : MonoBehaviour
 
 		int spawnPointIndex2 = Random.Range (0, spawnPoints2.Length);
 
-		Network.Instantiate (enemy2, spawnPoints2[spawnPointIndex2].position, spawnPoints2[spawnPointIndex2].rotation, 0);
+		//Network.Instantiate (enemy2, spawnPoints2[spawnPointIndex2].position, spawnPoints2[spawnPointIndex2].rotation, 0);
 	}
 	
 	void SpawnEnemy3 ()
@@ -119,7 +113,7 @@ public class EnemyManager : MonoBehaviour
 
 		int spawnPointIndex3 = Random.Range (0, spawnPoints3.Length);
 
-		Network.Instantiate (enemy3, spawnPoints3[spawnPointIndex3].position, spawnPoints3[spawnPointIndex3].rotation, 0);
+		//Network.Instantiate (enemy3, spawnPoints3[spawnPointIndex3].position, spawnPoints3[spawnPointIndex3].rotation, 0);
 	}
 
 	IEnumerator Waves1()
@@ -127,24 +121,25 @@ public class EnemyManager : MonoBehaviour
 		foreach(int amount in waveAmounts1)
 		{
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
+
 			while(!everythingKilled)
 			{
 				yield return new WaitForSeconds(1);
 			}
+
 			if(everythingKilled)
 			{
 				yield return new WaitForSeconds(timeBetweenWaves);
-				GetComponent<NetworkView>().RPC ("AnimateNight", RPCMode.All);
+				AnimateNight();
 				yield return new WaitForSeconds(nightAnimationTime);
+
 				for(int i = 0; i < amount; i++)
 				{
 					Invoke("SpawnEnemy1", timeBetweenSpawns1);
 					yield return new WaitForSeconds(timeBetweenSpawns1);
                 }
-                if(Network.isServer)
-                {
-                    GetComponent<NetworkView>().RPC("UpdateNight", RPCMode.All);
-                }
+
+                UpdateNight();
 			}
 		}
 	}
@@ -154,14 +149,17 @@ public class EnemyManager : MonoBehaviour
 		foreach(int amount in waveAmounts2)
 		{
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
+
 			while(!everythingKilled)
 			{
 				yield return new WaitForSeconds(1);
 			}
+
 			if(everythingKilled)
 			{
 				yield return new WaitForSeconds(timeBetweenWaves);
 				yield return new WaitForSeconds(nightAnimationTime);
+
 				for(int i = 0; i < amount; i++)
 				{
 					Invoke("SpawnEnemy2", timeBetweenSpawns2);
@@ -176,10 +174,12 @@ public class EnemyManager : MonoBehaviour
 		foreach(int amount in waveAmounts3)
 		{
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
+
 			while(!everythingKilled)
 			{
 				yield return new WaitForSeconds(1);
 			}
+
 			if(everythingKilled)
 			{
 				yield return new WaitForSeconds(timeBetweenWaves);
@@ -193,14 +193,12 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
-    [RPC]
     void UpdateNight()
     {
         waveNumber++;
         nightText.text = "Night " + waveNumber;
     }
 
-	[RPC]
 	void AnimateNight()
 	{
 		anim.SetTrigger ("Night");

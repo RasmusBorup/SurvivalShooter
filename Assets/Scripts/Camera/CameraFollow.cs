@@ -18,18 +18,10 @@ public class CameraFollow : MonoBehaviour
 	{
 		if (!playerFound) 
 		{
-			GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-			foreach (GameObject player in players) 
-			{
-				Debug.Log("Found " + players.Length + " players");
-				if(player.GetComponent<NetworkView>().isMine)
-				{
-					target = player.GetComponent<Transform>();
-					offset = transform.position - target.position;
-					Debug.Log ("Found My Player To Follow");
-					playerFound = true;
-				}
-			}
+			GameObject player = GameObject.Find("Player");
+			target = player.GetComponent<Transform>();
+			offset = transform.position - target.position;
+			playerFound = true;
 		}
 
 		if(playerFound)

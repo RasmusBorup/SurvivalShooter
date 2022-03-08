@@ -49,52 +49,21 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
-		if (GetComponent<NetworkView>().isMine) 
-		{
-			healthText.text = currentHealth + "/" + startingHealth;
-		}
-        if(damaged && GetComponent<NetworkView>().isMine)
-        {
+        healthText.text = currentHealth + "/" + startingHealth;
+
+        if(damaged) {
             damageImage.color = flashColour;
-        }
-        else
-        {
+        } else {
             damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
     }
 
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-        if (stream.isWriting) 
-        {
-            int syncHealth = currentHealth;
-            int syncMaxHealth = startingHealth;
-
-            stream.Serialize(ref syncHealth);
-            stream.Serialize(ref syncMaxHealth);
-        } 
-        else 
-        {
-            int syncHealth = 0;
-            int syncMaxHealth = 0;
-            stream.Serialize(ref syncHealth);
-            stream.Serialize(ref syncMaxHealth);
-            currentHealth = syncHealth;
-            startingHealth = syncMaxHealth;
-        }
-    }
-
     public void TakeDamage (int amount)
     {
         damaged = true;
-
         currentHealth -= amount;
-
-		if (GetComponent<NetworkView>().isMine) 
-		{
-			healthSlider.value = currentHealth;
-		}
+        healthSlider.value = currentHealth;
         playerAudio.Play ();
 
         if(currentHealth <= 0 && !isDead)

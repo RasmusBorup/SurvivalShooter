@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenuManager : MonoBehaviour 
 {
 	[SerializeField]
 	GameObject buttons;
-	[SerializeField]
-	GameObject servers;
 	[SerializeField]
 	GameObject playerPrefab;
 
@@ -18,12 +17,6 @@ public class MainMenuManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		Application.LoadLevel ("Level 01");
-	}
-	
-	public void FindServers()
-	{
-		buttons.SetActive (false);
-		servers.SetActive (true);
+		SceneManager.LoadScene ("Level 01");
 	}
 }

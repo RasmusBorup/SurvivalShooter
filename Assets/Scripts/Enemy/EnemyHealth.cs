@@ -91,21 +91,6 @@ public class EnemyHealth : MonoBehaviour
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
         ScoreManager.score += scoreValue;
-        RemoveBufferedInstantiate(gameObject.GetComponent<NetworkView>().viewID);
         Destroy (gameObject, 2f);
-    }
-
-    //Done this way to minimize the bandwidth requirement. 
-    [RPC]
-    void RemoveBufferedInstantiate (NetworkViewID viewID) 
-    {
-        if (Network.isServer) 
-        {
-            Network.RemoveRPCs (viewID);
-        } 
-//        else 
-//        {
-//            networkView.RPC ("RemoveBufferedInstantiate", RPCMode.Server, viewID);
-//        }
     }
 }

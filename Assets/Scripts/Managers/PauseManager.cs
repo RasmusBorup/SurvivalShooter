@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -23,13 +24,13 @@ public class PauseManager : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.Escape))
 	   	{
-            GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
+            PauseToggle();
 		}
 	}
 
-    [RPC]
 	void PauseToggle()
 	{
+		Debug.Log("Pause toggled---------------------------------");
 		if (paused) 
 		{
 			Time.timeScale = 1;
@@ -64,23 +65,18 @@ public class PauseManager : MonoBehaviour
 		quitToDesktopButton.gameObject.SetActive (true);
 	}
 
-
-
 	public void Resume()
     {
-        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
+        PauseToggle();
 	}
 
 	public void QuitToMain()
 	{
-        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
-        Network.Disconnect();
+		SceneManager.LoadScene("Main Menu");
 	}
 
 	public void QuitToDesktop()
     {
-        GetComponent<NetworkView>().RPC("PauseToggle", RPCMode.All);
-        Network.Disconnect();
 		Application.Quit ();
 	}
 }

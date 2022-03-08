@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameOverManager : MonoBehaviour
     Animator anim;
     GameObject[] players;
     int playersAlive;
-    int levelPrefix = 0;
+    //int levelPrefix = 0;
 
     void Awake()
     {
@@ -51,25 +52,17 @@ public class GameOverManager : MonoBehaviour
 			anim.SetTrigger("GameOver");	
 			if(Input.GetKeyDown (KeyCode.R))
 			{
-                GetComponent<NetworkView>().RPC("RestartLevel", RPCMode.All);
+                RestartLevel();
 			}
 			if(Input.GetKeyDown(KeyCode.Q))
 			{
-                Network.Disconnect();
+                SceneManager.LoadScene("Main Menu");
 			}
         }
     }
 
-    [RPC]
     void RestartLevel()
     {
-        foreach (GameObject player in players)
-        {
-            if(player.GetComponent<NetworkView>().isMine)
-            {
-                Network.RemoveRPCs(player.GetComponent<NetworkView>().viewID);
-            }
-        }
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

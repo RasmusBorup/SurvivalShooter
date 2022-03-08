@@ -20,15 +20,13 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (GetComponent<NetworkView>().isMine) {
-			float horizontal = Input.GetAxisRaw ("Horizontal");
-			float vertical = Input.GetAxisRaw ("Vertical");
-			bool mouseMoveDown = Input.GetMouseButton (1);
-			Move (horizontal, vertical);
-			MouseMove (mouseMoveDown);
-			Turning ();
-			Animating (horizontal, vertical, mouseMoveDown);
-		}
+		float horizontal = Input.GetAxisRaw ("Horizontal");
+		float vertical = Input.GetAxisRaw ("Vertical");
+		bool mouseMoveDown = Input.GetMouseButton (1);
+		Move (horizontal, vertical);
+		MouseMove (mouseMoveDown);
+		Turning ();
+		Animating (horizontal, vertical, mouseMoveDown);
 	}
 
 	void Move(float horizontal, float vertical)
@@ -42,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void MouseMove(bool mouseMoveDown)
 	{
-
 		mouseMovement.Set (0f, 0f, 1f);
 		mouseMovement = mouseMovement * speed * Time.deltaTime;
 		if (mouseMoveDown) 

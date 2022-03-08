@@ -17,7 +17,7 @@ public class EnemyAttack : MonoBehaviour
 
     void Awake ()
 	{
-		focusedPlayer = gameObject.GetComponentInChildren<EnemyFocusManager> ().FindClosestPlayer();
+		focusedPlayer = GameObject.FindGameObjectWithTag ("Player");
 		playerHealth = focusedPlayer.GetComponent <PlayerHealth> ();
 		enemyHealth = GetComponent<EnemyHealth>();
 		anim = GetComponent <Animator> ();
@@ -49,9 +49,6 @@ public class EnemyAttack : MonoBehaviour
 
     void Update ()
     {
-        focusedPlayer = gameObject.GetComponent<EnemyFocusManager> ().FindClosestPlayer();
-        playerHealth = focusedPlayer.GetComponent <PlayerHealth> ();
-
         timer += Time.deltaTime;
 
         if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
