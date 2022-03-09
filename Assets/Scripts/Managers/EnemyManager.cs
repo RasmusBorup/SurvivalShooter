@@ -86,34 +86,30 @@ public class EnemyManager : MonoBehaviour
            return;
        }
 
-        int spawnPointIndex1 = Random.Range (0, spawnPoints1.Length);
-		Instantiate (enemy1, spawnPoints1[spawnPointIndex1].position, spawnPoints1[spawnPointIndex1].rotation);
-
-		// Network.Instantiate (enemy1, spawnPoints1[spawnPointIndex1].position, spawnPoints1[spawnPointIndex1].rotation, 0);
+        int spawnPointIndex = Random.Range (0, spawnPoints1.Length);
+		Instantiate (enemy1, spawnPoints1[spawnPointIndex].position, spawnPoints1[spawnPointIndex].rotation);
     }
 	
 	void SpawnEnemy2 ()
 	{
-//        if(gameOver)
-//		{
-//			return;
-//		}
+       if(gameOver)
+		{
+			return;
+		}
 
-		int spawnPointIndex2 = Random.Range (0, spawnPoints2.Length);
-
-		//Network.Instantiate (enemy2, spawnPoints2[spawnPointIndex2].position, spawnPoints2[spawnPointIndex2].rotation, 0);
+		int spawnPointIndex = Random.Range (0, spawnPoints2.Length);
+		Instantiate (enemy2, spawnPoints2[spawnPointIndex].position, spawnPoints2[spawnPointIndex].rotation);
 	}
 	
 	void SpawnEnemy3 ()
 	{
-//        if(gameOver)
-//		{
-//			return;
-//		}
+       if(gameOver)
+		{
+			return;
+		}
 
-		int spawnPointIndex3 = Random.Range (0, spawnPoints3.Length);
-
-		//Network.Instantiate (enemy3, spawnPoints3[spawnPointIndex3].position, spawnPoints3[spawnPointIndex3].rotation, 0);
+		int spawnPointIndex = Random.Range (0, spawnPoints3.Length);
+		Instantiate (enemy3, spawnPoints3[spawnPointIndex].position, spawnPoints3[spawnPointIndex].rotation);
 	}
 
 	IEnumerator Waves1()

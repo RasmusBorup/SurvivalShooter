@@ -30,7 +30,6 @@ public class PauseManager : MonoBehaviour
 
 	void PauseToggle()
 	{
-		Debug.Log("Pause toggled---------------------------------");
 		if (paused) 
 		{
 			Time.timeScale = 1;

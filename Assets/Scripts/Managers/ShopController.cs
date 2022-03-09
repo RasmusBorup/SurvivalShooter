@@ -31,12 +31,14 @@ public class ShopController : MonoBehaviour
 	PlayerHealth playerHealth;
 	PlayerShooting playerShooting;
 	bool playerInRange;
-	bool playerFound;
+	bool shopOpen = false;
 
 	// Use this for initialization
 	void Start () 
 	{
-        playerFound = false;
+		player = GameObject.FindGameObjectWithTag("Player");
+		playerHealth = player.GetComponent<PlayerHealth> ();
+		playerShooting = player.GetComponentInChildren<PlayerShooting> ();
 	}
 
     void Awake()
@@ -45,20 +47,13 @@ public class ShopController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (!playerFound) 
-		{
-            player = GameObject.FindGameObjectWithTag("Player");
-			playerHealth = player.GetComponent<PlayerHealth> ();
-			playerShooting = player.GetComponentInChildren<PlayerShooting> ();
-			playerInRange = false;
-			playerFound = true;
-		}
 		if (playerHealth.currentHealth <= 0) {
 			playerInRange = false;
 		}
+
 		if (playerInRange) {
-			if(Input.GetKeyDown(KeyCode.E))
-			{
+			if(Input.GetKeyDown(KeyCode.E) && !shopOpen) {
+				shopOpen = true;
 				StartCoroutine("ShowShop");
 			}
 		}
@@ -71,7 +66,6 @@ public class ShopController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-        //Burde måske ændre dette til at kigge på afstanden til spiller i stedet for
 		if (other.gameObject == player) 
 		{
 			playerInRange = true;
@@ -81,9 +75,9 @@ public class ShopController : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject == player) 
-		{
+		if (other.gameObject == player) {
 			playerInRange = false;
+			shopOpen = false;
 			enterShopText.gameObject.SetActive(false);
 		}
 	}
@@ -93,11 +87,14 @@ public class ShopController : MonoBehaviour
 		while (playerInRange) {
 			shop.gameObject.SetActive(true);
 			yield return null;
-			if(Input.GetKeyDown(KeyCode.E))
-			{
-				playerInRange = false;
+
+			if(Input.GetKeyDown(KeyCode.E))	{
+				shopOpen = false;
+
+				break;
 			}
 		}
+
 		shop.gameObject.SetActive (false);
 	}
 
