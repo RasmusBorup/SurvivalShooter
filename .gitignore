@@ -241,3 +241,5 @@ Library/**
 Library/metadata/**
 Library/ShaderCache/**
 Temp/**
+Builds/*
+Builds/**
