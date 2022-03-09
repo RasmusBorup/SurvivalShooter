@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 419466}
   - component: {fileID: 19919470}
   - component: {fileID: 19819470}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: HitParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - component: {fileID: 419468}
   - component: {fileID: 13719470}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Zombunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3498,7 +3498,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

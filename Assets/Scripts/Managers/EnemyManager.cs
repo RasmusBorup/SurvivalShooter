@@ -49,7 +49,6 @@ public class EnemyManager : MonoBehaviour
 
     void Start ()
 	{
-        everythingKilled = true;
         waveNumber = 1;
 		nightText = GameObject.Find ("NightText").GetComponent<Text> ();
 		GameObject nightImage = GameObject.Find ("NightImage");
@@ -67,22 +66,19 @@ public class EnemyManager : MonoBehaviour
 
 	void Update()
 	{
-		if (GameObject.FindGameObjectsWithTag ("Enemy").Length == 0) 
-		{
+		everythingKilled = false;
+
+		if (GameObject.FindWithTag ("Enemy") == null) {
+			Debug.Log(System.DateTime.Now + " - No enemies found");
 			everythingKilled = true;
 		}
-		else 
-		{
-			everythingKilled = false;
-		}
-		
+
         gameOver = GameObject.Find("GameOver").GetComponent<GameOverManager>().gameOver;
 	}
 
     void SpawnEnemy1 ()
     {
-       if(gameOver)
-       {
+       if(gameOver) {
            return;
        }
 
@@ -92,8 +88,7 @@ public class EnemyManager : MonoBehaviour
 	
 	void SpawnEnemy2 ()
 	{
-       if(gameOver)
-		{
+       if(gameOver) {
 			return;
 		}
 
@@ -103,8 +98,7 @@ public class EnemyManager : MonoBehaviour
 	
 	void SpawnEnemy3 ()
 	{
-       if(gameOver)
-		{
+       if(gameOver) {
 			return;
 		}
 
@@ -114,23 +108,19 @@ public class EnemyManager : MonoBehaviour
 
 	IEnumerator Waves1()
 	{
-		foreach(int amount in waveAmounts1)
-		{
+		foreach(int amount in waveAmounts1)	{
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
 
-			while(!everythingKilled)
-			{
+			while(!everythingKilled) {
 				yield return new WaitForSeconds(1);
 			}
 
-			if(everythingKilled)
-			{
+			if(everythingKilled) {
 				yield return new WaitForSeconds(timeBetweenWaves);
 				AnimateNight();
 				yield return new WaitForSeconds(nightAnimationTime);
 
-				for(int i = 0; i < amount; i++)
-				{
+				for(int i = 0; i < amount; i++)	{
 					Invoke("SpawnEnemy1", timeBetweenSpawns1);
 					yield return new WaitForSeconds(timeBetweenSpawns1);
                 }
@@ -142,22 +132,18 @@ public class EnemyManager : MonoBehaviour
 	
 	IEnumerator Waves2()
 	{
-		foreach(int amount in waveAmounts2)
-		{
+		foreach(int amount in waveAmounts2)	{
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
 
-			while(!everythingKilled)
-			{
+			while(!everythingKilled) {
 				yield return new WaitForSeconds(1);
 			}
 
-			if(everythingKilled)
-			{
+			if(everythingKilled) {
 				yield return new WaitForSeconds(timeBetweenWaves);
 				yield return new WaitForSeconds(nightAnimationTime);
 
-				for(int i = 0; i < amount; i++)
-				{
+				for(int i = 0; i < amount; i++)	{
 					Invoke("SpawnEnemy2", timeBetweenSpawns2);
 					yield return new WaitForSeconds(timeBetweenSpawns2);
 				}
@@ -167,21 +153,18 @@ public class EnemyManager : MonoBehaviour
 	
 	IEnumerator Waves3()
 	{
-		foreach(int amount in waveAmounts3)
-		{
+		foreach(int amount in waveAmounts3) {
 			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
 
-			while(!everythingKilled)
-			{
+			while(!everythingKilled) {
 				yield return new WaitForSeconds(1);
 			}
 
-			if(everythingKilled)
-			{
+			if(everythingKilled) {
 				yield return new WaitForSeconds(timeBetweenWaves);
 				yield return new WaitForSeconds(nightAnimationTime);
-				for(int i = 0; i < amount; i++)
-				{
+
+				for(int i = 0; i < amount; i++)	{
 					Invoke("SpawnEnemy3", timeBetweenSpawns3);
 					yield return new WaitForSeconds(timeBetweenSpawns3);
 				}
