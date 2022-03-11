@@ -69,7 +69,6 @@ public class EnemyManager : MonoBehaviour
 		everythingKilled = false;
 
 		if (GameObject.FindWithTag ("Enemy") == null) {
-			Debug.Log(System.DateTime.Now + " - No enemies found");
 			everythingKilled = true;
 		}
 
