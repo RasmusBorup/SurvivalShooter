@@ -11,171 +11,96 @@ public class EnemyManager : MonoBehaviour
 	GameObject enemy2;
 	[SerializeField]
 	GameObject enemy3;
-
 	[SerializeField]
 	Transform[] spawnPoints1;
 	[SerializeField]
 	Transform[] spawnPoints2;
 	[SerializeField]
 	Transform[] spawnPoints3;
-
-	[SerializeField]
-	int[] waveAmounts1;
-	[SerializeField]
-	int[] waveAmounts2;
-	[SerializeField]
-	int[] waveAmounts3;
-
 	[SerializeField]
 	float timeBetweenSpawns1 = 2f;
 	[SerializeField]
 	float timeBetweenSpawns2 = 2f;
 	[SerializeField]
 	float timeBetweenSpawns3 = 5f;
-
 	[SerializeField]
 	float timeBetweenWaves = 5f;
 	[SerializeField]
 	float nightAnimationTime;
-	[SerializeField]
-	bool everythingKilled;
 
 	Animator anim;
 	Text nightText;
+	bool everythingKilled;
+	bool waveDone;
 	int waveNumber;
-	GameObject[] players;
-	bool gameOver;
+	int stillSpawning;
 	#endregion
 
     void Start ()
 	{
-        waveNumber = 1;
+        waveNumber = 0;
 		nightText = GameObject.Find ("NightText").GetComponent<Text> ();
 		GameObject nightImage = GameObject.Find ("NightImage");
-		if(nightImage)
-		{
+		waveDone = true;
+
+		if(nightImage) {
 			anim = nightImage.GetComponent<Animator> ();
 		}
+    }
 
-		StartCoroutine (Waves1());
-		StartCoroutine (Waves2());
-		StartCoroutine (Waves3 ());
+	IEnumerator SpawnWaves()
+	{
+		// Increment Night
+		waveDone = false;
+		waveNumber++;
+		nightText.text = "Night " + waveNumber;
+		stillSpawning = 3;
 
-		gameOver = false;
+		// Animate Night
+		yield return new WaitForSeconds(timeBetweenWaves);
+		AnimateNight();
+		yield return new WaitForSeconds(nightAnimationTime);
+
+		// Spawn new wave
+		StartCoroutine(SpawnEnemy(enemy1, spawnPoints1, timeBetweenSpawns1, 1));
+		StartCoroutine(SpawnEnemy(enemy2, spawnPoints2, timeBetweenSpawns2, 2));
+		StartCoroutine(SpawnEnemy(enemy3, spawnPoints3, timeBetweenSpawns3, 3));
+	}
+
+    IEnumerator SpawnEnemy (GameObject enemy, Transform[] spawnPoints, float timeBetweenSpawns, int startWave)
+    {
+		if (waveNumber < startWave) {
+			stillSpawning--;
+			yield break;
+		}
+
+		int amount = (int)System.Math.Pow(2, waveNumber - startWave + 1);
+
+		for (int i = 0; i < amount; i++) {
+			yield return new WaitForSeconds(timeBetweenSpawns);
+
+			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+			Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+			everythingKilled = false;
+		}
+
+		stillSpawning--;
     }
 
 	void Update()
 	{
-		everythingKilled = false;
-
 		if (GameObject.FindWithTag ("Enemy") == null) {
 			everythingKilled = true;
 		}
 
-        gameOver = GameObject.Find("GameOver").GetComponent<GameOverManager>().gameOver;
-	}
-
-    void SpawnEnemy1 ()
-    {
-       if(gameOver) {
-           return;
-       }
-
-        int spawnPointIndex = Random.Range (0, spawnPoints1.Length);
-		Instantiate (enemy1, spawnPoints1[spawnPointIndex].position, spawnPoints1[spawnPointIndex].rotation);
-    }
-	
-	void SpawnEnemy2 ()
-	{
-       if(gameOver) {
-			return;
+		if (everythingKilled && stillSpawning == 0) {
+			waveDone = true;
 		}
 
-		int spawnPointIndex = Random.Range (0, spawnPoints2.Length);
-		Instantiate (enemy2, spawnPoints2[spawnPointIndex].position, spawnPoints2[spawnPointIndex].rotation);
-	}
-	
-	void SpawnEnemy3 ()
-	{
-       if(gameOver) {
-			return;
-		}
-
-		int spawnPointIndex = Random.Range (0, spawnPoints3.Length);
-		Instantiate (enemy3, spawnPoints3[spawnPointIndex].position, spawnPoints3[spawnPointIndex].rotation);
-	}
-
-	IEnumerator Waves1()
-	{
-		foreach(int amount in waveAmounts1)	{
-			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
-
-			while(!everythingKilled) {
-				yield return new WaitForSeconds(1);
-			}
-
-			if(everythingKilled) {
-				yield return new WaitForSeconds(timeBetweenWaves);
-				AnimateNight();
-				yield return new WaitForSeconds(nightAnimationTime);
-
-				for(int i = 0; i < amount; i++)	{
-					Invoke("SpawnEnemy1", timeBetweenSpawns1);
-					yield return new WaitForSeconds(timeBetweenSpawns1);
-                }
-
-                UpdateNight();
-			}
+		if (waveDone) {
+			StartCoroutine(SpawnWaves());
 		}
 	}
-	
-	IEnumerator Waves2()
-	{
-		foreach(int amount in waveAmounts2)	{
-			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
-
-			while(!everythingKilled) {
-				yield return new WaitForSeconds(1);
-			}
-
-			if(everythingKilled) {
-				yield return new WaitForSeconds(timeBetweenWaves);
-				yield return new WaitForSeconds(nightAnimationTime);
-
-				for(int i = 0; i < amount; i++)	{
-					Invoke("SpawnEnemy2", timeBetweenSpawns2);
-					yield return new WaitForSeconds(timeBetweenSpawns2);
-				}
-			}
-		}
-	}
-	
-	IEnumerator Waves3()
-	{
-		foreach(int amount in waveAmounts3) {
-			yield return new WaitForSeconds(timeBetweenSpawns1 + 1);
-
-			while(!everythingKilled) {
-				yield return new WaitForSeconds(1);
-			}
-
-			if(everythingKilled) {
-				yield return new WaitForSeconds(timeBetweenWaves);
-				yield return new WaitForSeconds(nightAnimationTime);
-
-				for(int i = 0; i < amount; i++)	{
-					Invoke("SpawnEnemy3", timeBetweenSpawns3);
-					yield return new WaitForSeconds(timeBetweenSpawns3);
-				}
-			}
-		}
-	}
-
-    void UpdateNight()
-    {
-        waveNumber++;
-        nightText.text = "Night " + waveNumber;
-    }
 
 	void AnimateNight()
 	{

@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
 
 
     Animator anim;
-    GameObject focusedPlayer;
+    GameObject player;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
     bool playerInRange;
@@ -17,8 +17,8 @@ public class EnemyAttack : MonoBehaviour
 
     void Awake ()
 	{
-		focusedPlayer = GameObject.FindGameObjectWithTag ("Player");
-		playerHealth = focusedPlayer.GetComponent <PlayerHealth> ();
+		player = GameObject.FindGameObjectWithTag ("Player");
+		playerHealth = player.GetComponent <PlayerHealth> ();
 		enemyHealth = GetComponent<EnemyHealth>();
 		anim = GetComponent <Animator> ();
     }
@@ -31,8 +31,7 @@ public class EnemyAttack : MonoBehaviour
     IEnumerator OnTriggerEnter (Collider other)
     {
         playerInRange = true;
-        while(playerInRange && other.gameObject == focusedPlayer && focusedPlayer.GetComponent<PlayerHealth>().currentHealth > 0)
-        {
+        while(playerInRange && other.gameObject == player && playerHealth.currentHealth > 0) {
             yield return playerInRange = true;
         }
         playerInRange = false;
@@ -40,7 +39,7 @@ public class EnemyAttack : MonoBehaviour
 
     void OnTriggerExit (Collider other)
     {
-        if(other.gameObject == focusedPlayer)
+        if(other.gameObject == player)
         {
             playerInRange = false;
         }
@@ -65,11 +64,9 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack ()
     {
-		playerHealth = focusedPlayer.GetComponent <PlayerHealth> ();
 		timer = 0f;
 
-        if(playerHealth.currentHealth > 0)
-        {
+        if(playerHealth.currentHealth > 0) {
             playerHealth.TakeDamage (attackDamage);
         }
     }

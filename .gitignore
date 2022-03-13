@@ -237,4 +237,7 @@ _Pvt_Extensions
 
 
 Builds/*
-Builds/**
+# Builds/**
+
+Temp/*
+# Temp/**

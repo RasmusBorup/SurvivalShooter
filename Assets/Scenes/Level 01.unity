@@ -1604,36 +1604,8 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 444684, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 14866400, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
       propertyPath: m_ViewID.m_ID
@@ -1667,7 +1639,16 @@ Prefab:
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11484340, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
+      propertyPath: damagePerShot
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444690, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 14866400, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b07be5c3c6dcabe47905a6a2e666c2a9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1181317866
@@ -1927,15 +1908,11 @@ MonoBehaviour:
   spawnPoints3:
   - {fileID: 306711531}
   - {fileID: 1195129979}
-  waveAmounts1: 02000000050000000a000000140000002800000050000000a0000000
-  waveAmounts2: 0000000002000000010000000a000000140000002800000050000000
-  waveAmounts3: 000000000000000002000000050000000a0000001400000028000000
-  timeBetweenSpawns1: 1
-  timeBetweenSpawns2: 2
-  timeBetweenSpawns3: 5
-  timeBetweenWaves: 1
+  timeBetweenSpawns1: 2
+  timeBetweenSpawns2: 4
+  timeBetweenSpawns3: 8
+  timeBetweenWaves: 4
   nightAnimationTime: 1
-  everythingKilled: 0
 --- !u!4 &1277616524
 Transform:
   m_ObjectHideFlags: 0
@@ -1953,7 +1930,7 @@ Transform:
   - {fileID: 21158761}
   - {fileID: 1195129979}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285768750
 GameObject:
@@ -2844,7 +2821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Upgrades
 --- !u!222 &1643181208
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3698,7 +3675,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2106037423}
   m_LocalRotation: {x: 0.25881907, y: 0, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: -0.6, y: 20, z: -30}
+  m_LocalPosition: {x: 0, y: 18, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
