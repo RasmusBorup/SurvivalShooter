@@ -6,6 +6,8 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.5f;
     public float range = 100f;
 	public float shotOrigin = 1;
+    public int magazineSize = 5;
+    public float reloadTime = 5f;
 
 
     float timer;
@@ -17,7 +19,9 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.05f;
-
+    bool isReloading;
+    int bulletsLeftInMagazine;
+    public float reloadTimer;
 
     void Awake ()
     {
@@ -27,6 +31,9 @@ public class PlayerShooting : MonoBehaviour
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
         shootRay = new Ray();
+        isReloading = false;
+        bulletsLeftInMagazine = magazineSize;
+        reloadTimer = 0;
     }
 
 
@@ -43,6 +50,10 @@ public class PlayerShooting : MonoBehaviour
         {
             DisableEffects();
         }
+
+        if (isReloading || Input.GetKeyDown("r")) {
+            reload();
+        }
     }
 
     public void DisableEffects ()
@@ -53,36 +64,64 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot ()
     {
+        if (isReloading) {
+            return;
+        }
+
         timer = 0f;
 
         gunAudio.Play ();
-
         gunLight.enabled = true;
-
         gunParticles.Stop ();
         gunParticles.Play ();
-
         gunLine.enabled = true;
         gunLine.SetPosition (0, transform.position);
-
 
         shootRay.origin = transform.position - transform.forward.normalized * shotOrigin;
 		// - transform.forward.normalized * shotOrigin as the shot would start inside the collider of
 		//an enemy who was standing right by you.
 		shootRay.direction = transform.forward;
 
-        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
-        {
+        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask)) {
+            gunLine.SetPosition (1, shootHit.point);
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
-            if(enemyHealth != null)
-            {
+
+            if(enemyHealth != null) {
                 enemyHealth.TakeDamage (damagePerShot, shootHit.point);
             }
-            gunLine.SetPosition (1, shootHit.point);
-        }
-        else
-        {
+        } else {
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
         }
+
+        bulletsLeftInMagazine--;
+
+        if (bulletsLeftInMagazine == 0) {
+            reload();
+
+            return;
+        }
+    }
+
+    void reload()
+    {
+        if (bulletsLeftInMagazine == magazineSize) {
+            return;
+        }
+
+        reloadTimer += Time.deltaTime;
+
+        if (isReloading && reloadTimer < reloadTime) {
+            return;
+        }
+
+        if (isReloading && reloadTimer >= reloadTime) {
+            reloadTimer = 0;
+            bulletsLeftInMagazine = magazineSize;
+            isReloading = false;
+
+            return;
+        }
+
+        isReloading = true;
     }
 }

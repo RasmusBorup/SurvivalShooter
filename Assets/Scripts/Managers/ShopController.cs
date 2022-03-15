@@ -15,6 +15,10 @@ public class ShopController : MonoBehaviour
 	public int fireRatePriceIncrease;
 	public float fireRateIncrease;
 
+	public int magazineSizePrice;
+	public int magazineSizePriceIncrease;
+	public int magazineSizeIncrease;
+
 	public int healthPrice = 100;
 	public int healthPriceIncrease = 100;
 	public int healthIncrease = 10;
@@ -25,7 +29,8 @@ public class ShopController : MonoBehaviour
 	public Button upgradeDamageButton;
 	public Button upgradeFireRateButton;
 	public Button upgradeHealthButton;
-
+	public Button upgradeMagazineSizeButton;
+	public Button restoreHealthButton;
 
 	GameObject player;
 	PlayerHealth playerHealth;
@@ -39,6 +44,11 @@ public class ShopController : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealth> ();
 		playerShooting = player.GetComponentInChildren<PlayerShooting> ();
+		upgradeDamageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
+		upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
+		upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
+		upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
+		restoreHealthButton.GetComponentInChildren<Text> ().text = "Restore \n" + restoreHealthPrice + " Health \n\n Price: \n" + restoreHealthPrice;
 	}
 
     void Awake()
@@ -66,8 +76,7 @@ public class ShopController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject == player) 
-		{
+		if (other.gameObject == player) {
 			playerInRange = true;
 			enterShopText.gameObject.SetActive(true);
 		}
@@ -116,6 +125,18 @@ public class ShopController : MonoBehaviour
 			upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
 			playerShooting.timeBetweenBullets /= fireRateIncrease;
 		}
+	}
+
+	public void MagazineSizeUpgrade()
+	{
+		if (ScoreManager.score < magazineSizePrice) {
+			return;
+		}
+
+		ScoreManager.score -= magazineSizePrice;
+		magazineSizePrice += magazineSizePriceIncrease;
+		upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
+		playerShooting.magazineSize += magazineSizeIncrease;
 	}
 
 	public void HealthUpgrade()
