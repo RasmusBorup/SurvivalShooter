@@ -13,12 +13,13 @@ public class ScoreManager : MonoBehaviour
     void Awake ()
     {
         text = GetComponent <Text> ();
-        score = 100;
+        score = StateManager.CurrentScore;
     }
 
 
     void Update ()
     {
         text.text = "Score: " + score;
+        StateManager.CurrentScore = score;
     }
 }

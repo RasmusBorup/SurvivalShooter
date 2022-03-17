@@ -49,6 +49,8 @@ public class GameOverManager : MonoBehaviour
 
         if (gameOver)
 		{
+            StateManager.Save();
+
 			anim.SetTrigger("GameOver");	
 			if(Input.GetKeyDown (KeyCode.R))
 			{
