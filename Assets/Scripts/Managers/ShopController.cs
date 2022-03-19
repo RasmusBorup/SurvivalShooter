@@ -36,7 +36,7 @@ public class ShopController : MonoBehaviour
 	PlayerHealth playerHealth;
 	PlayerShooting playerShooting;
 	bool playerInRange;
-	bool shopOpen = false;
+	public bool shopOpen = false;
 
 	// Use this for initialization
 	void Start () 
@@ -50,9 +50,6 @@ public class ShopController : MonoBehaviour
 		upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
 		restoreHealthButton.GetComponentInChildren<Text> ().text = "Restore \n" + restoreHealthPrice + " Health \n\n Price: \n" + restoreHealthPrice;
 	}
-
-    void Awake()
-    {}
 	
 	// Update is called once per frame
 	void Update () 
@@ -67,11 +64,6 @@ public class ShopController : MonoBehaviour
 				StartCoroutine("ShowShop");
 			}
 		}
-	}
-
-	void FixedUpdate()
-	{
-
 	}
 
 	void OnTriggerEnter(Collider other)

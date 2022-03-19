@@ -24,7 +24,6 @@ public class MainMenuManager : MonoBehaviour
 
 	void Awake()
 	{
-		Debug.Log("Rab");
 		backButton = GameObject.Find("BackButton");
 		backButton.SetActive(false);
 	}

@@ -25,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
     public float reloadTimer;
 	Slider reloadSlider;
     Text ammoText;
+    ShopController shopController;
 
     void Awake ()
     {
@@ -32,10 +33,12 @@ public class PlayerShooting : MonoBehaviour
         reloadSlider = GameObject.Find("ReloadSlider").GetComponent<Slider>();
         reloadSlider.gameObject.SetActive(false);
         shootableMask = LayerMask.GetMask ("Shootable");
+        shopController = GameObject.Find("Shopkeeper").GetComponent<ShopController>();
         gunParticles = GetComponent<ParticleSystem> ();
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
+        
         shootRay = new Ray();
         isReloading = false;
         bulletsLeftInMagazine = magazineSize;
@@ -48,13 +51,11 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
-        {
+		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0) {
 			Shoot();
         }
 
-        if(timer >= timeBetweenBullets * effectsDisplayTime)
-        {
+        if(timer >= timeBetweenBullets * effectsDisplayTime) {
             DisableEffects();
         }
 
@@ -71,7 +72,7 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot ()
     {
-        if (isReloading) {
+        if (isReloading || shopController.shopOpen) {
             return;
         }
 
