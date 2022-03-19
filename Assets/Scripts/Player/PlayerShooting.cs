@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -22,9 +23,14 @@ public class PlayerShooting : MonoBehaviour
     bool isReloading;
     int bulletsLeftInMagazine;
     public float reloadTimer;
+	Slider reloadSlider;
+    Text ammoText;
 
     void Awake ()
     {
+        ammoText = GameObject.Find("AmmoText").GetComponent<Text>();
+        reloadSlider = GameObject.Find("ReloadSlider").GetComponent<Slider>();
+        reloadSlider.gameObject.SetActive(false);
         shootableMask = LayerMask.GetMask ("Shootable");
         gunParticles = GetComponent<ParticleSystem> ();
         gunLine = GetComponent <LineRenderer> ();
@@ -33,6 +39,7 @@ public class PlayerShooting : MonoBehaviour
         shootRay = new Ray();
         isReloading = false;
         bulletsLeftInMagazine = magazineSize;
+        UpdateAmmoCounter();
         reloadTimer = 0;
     }
 
@@ -94,6 +101,7 @@ public class PlayerShooting : MonoBehaviour
         }
 
         bulletsLeftInMagazine--;
+        UpdateAmmoCounter();
 
         if (bulletsLeftInMagazine == 0) {
             reload();
@@ -109,6 +117,7 @@ public class PlayerShooting : MonoBehaviour
         }
 
         reloadTimer += Time.deltaTime;
+        reloadSlider.value = reloadTimer / reloadTime * 100;
 
         if (isReloading && reloadTimer < reloadTime) {
             return;
@@ -118,10 +127,20 @@ public class PlayerShooting : MonoBehaviour
             reloadTimer = 0;
             bulletsLeftInMagazine = magazineSize;
             isReloading = false;
+            reloadSlider.gameObject.SetActive(false);
+            ammoText.text = bulletsLeftInMagazine + "/" + magazineSize;
 
             return;
         }
 
         isReloading = true;
+        reloadSlider.gameObject.SetActive(true);
+        bulletsLeftInMagazine = 0;
+        UpdateAmmoCounter();
+    }
+
+    public void UpdateAmmoCounter()
+    {
+        ammoText.text = bulletsLeftInMagazine + "/" + magazineSize;
     }
 }

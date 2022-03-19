@@ -59,6 +59,7 @@ public class EnemyManager : MonoBehaviour
 		// Animate Night
 		yield return new WaitForSeconds(timeBetweenWaves);
 		AnimateNight();
+		StateManager.Save();
 		yield return new WaitForSeconds(nightAnimationTime);
 
 		// Spawn new wave

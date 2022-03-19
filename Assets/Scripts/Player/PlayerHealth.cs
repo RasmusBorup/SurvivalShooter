@@ -24,14 +24,10 @@ public class PlayerHealth : MonoBehaviour
     void Awake ()
 	{
 		GameObject slider = GameObject.Find ("HealthSlider");
-		if (slider) {
-			healthSlider = slider.gameObject.GetComponent<Slider> ();
-		}
+		healthSlider = slider.gameObject.GetComponent<Slider> ();
 		
 		GameObject image = GameObject.Find ("DamageImage");
-		if (image) {
-			damageImage = image.GetComponent<Image> ();
-		}
+        damageImage = image.GetComponent<Image> ();
 
 		healthText = GameObject.Find ("HealthText").GetComponent<Text>();
 

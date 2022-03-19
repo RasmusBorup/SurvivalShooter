@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637828801756076551
-    m_Hash: 1111601992
+      ticks: 637832140913283333
+    m_Hash: 2230071980
   m_LockFileStatus:
     m_FilePath: D:/Spil Projekter/SurvivalShooter/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637828801844312033
-    m_Hash: 2195302925
+      ticks: 637832141038534234
+    m_Hash: 2752683930
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -395,12 +395,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.analytics.git
         revision: 16fe75b69f168b066926595ade9b0473c3b32c5f
         path: 
-    - packageId: com.unity.collab-proxy@1.15.12
+    - packageId: com.unity.collab-proxy@1.15.13
       testable: 0
       isDirectDependency: 1
-      version: 1.15.12
+      version: 1.15.13
       source: 1
-      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.collab-proxy@1.15.12
+      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.collab-proxy@1.15.13
       assetPath: Packages/com.unity.collab-proxy
       name: com.unity.collab-proxy
       displayName: Version Control
@@ -470,7 +470,6 @@ m_PackageAssets:
         - 2.1.0-preview.5
         - 2.1.0-preview.6
         compatible:
-        - 1.15.12
         - 1.15.13
         - 1.15.15
         - 2.0.0-preview.6
@@ -518,13 +517,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637789721280000000
+      datePublishedTicks: 637807003040000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-        revision: 5ca1fd4ca9f999e087d19e98afaf99905a582771
+        revision: 825774911ad2d1440ac844c9be1ae2c9b5dc7966
         path: 
     - packageId: com.unity.ide.rider@2.0.7
       testable: 0
@@ -611,7 +610,7 @@ m_PackageAssets:
         version: 1.1.1
       resolvedDependencies:
       - name: com.unity.test-framework
-        version: 1.1.29
+        version: 1.1.31
       - name: com.unity.ext.nunit
         version: 1.0.6
       - name: com.unity.modules.imgui
@@ -702,7 +701,7 @@ m_PackageAssets:
         version: 1.1.9
       resolvedDependencies:
       - name: com.unity.test-framework
-        version: 1.1.29
+        version: 1.1.31
       - name: com.unity.ext.nunit
         version: 1.0.6
       - name: com.unity.modules.imgui
@@ -730,12 +729,12 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
-    - packageId: com.unity.ide.vscode@1.2.4
+    - packageId: com.unity.ide.vscode@1.2.5
       testable: 0
       isDirectDependency: 1
-      version: 1.2.4
+      version: 1.2.5
       source: 1
-      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.ide.vscode@1.2.4
+      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.ide.vscode@1.2.5
       assetPath: Packages/com.unity.ide.vscode
       name: com.unity.ide.vscode
       displayName: Visual Studio Code Editor
@@ -795,20 +794,20 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637660806170000000
+      datePublishedTicks: 637800255360000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: git+https://github.com/Unity-Technologies/com.unity.ide.vscode.git
-        revision: 1f4f605d5c988cb610c372b5c5216c46cc8f5d30
+        url: https://github.com/Unity-Technologies/com.unity.ide.vscode.git
+        revision: b0740c80bfc2440527c317109f7c3d9100132722
         path: 
-    - packageId: com.unity.purchasing@4.1.2
+    - packageId: com.unity.purchasing@4.1.3
       testable: 0
       isDirectDependency: 1
-      version: 4.1.2
+      version: 4.1.3
       source: 1
-      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.purchasing@4.1.2
+      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.purchasing@4.1.3
       assetPath: Packages/com.unity.purchasing
       name: com.unity.purchasing
       displayName: In App Purchasing
@@ -974,20 +973,20 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637738064760000000
+      datePublishedTicks: 637799302690000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.purchasing.git
-        revision: c73a3b5ce4e0a8eb429214ad6702ceb8ece5fabe
+        revision: 8207d5de2cd24c44f9756fa5c4332ee2298ef83c
         path: 
-    - packageId: com.unity.test-framework@1.1.29
+    - packageId: com.unity.test-framework@1.1.31
       testable: 0
       isDirectDependency: 1
-      version: 1.1.29
+      version: 1.1.31
       source: 1
-      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.test-framework@1.1.29
+      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.test-framework@1.1.31
       assetPath: Packages/com.unity.test-framework
       name: com.unity.test-framework
       displayName: Test Framework
@@ -1038,8 +1037,6 @@ m_PackageAssets:
         - 2.0.1-pre.12
         - 2.0.1-pre.18
         compatible:
-        - 1.1.29
-        - 1.1.30
         - 1.1.31
         - 2.0.1-pre.12
         - 2.0.1-pre.18
@@ -1073,13 +1070,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637647922650000000
+      datePublishedTicks: 637804266210000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: git+https://github.com/Unity-Technologies/com.unity.test-framework.git
-        revision: dac53542acdab7a12e9ebf111ac588d0e53cf483
+        url: https://github.com/Unity-Technologies/com.unity.test-framework.git
+        revision: 438b0defc147c9be5c969ca79ff03a722b4590ed
         path: 
     - packageId: com.unity.textmeshpro@3.0.6
       testable: 0
@@ -1476,12 +1473,12 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
-    - packageId: com.unity.xr.legacyinputhelpers@2.1.8
+    - packageId: com.unity.xr.legacyinputhelpers@2.1.9
       testable: 0
       isDirectDependency: 1
-      version: 2.1.8
+      version: 2.1.9
       source: 1
-      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.xr.legacyinputhelpers@2.1.8
+      resolvedPath: D:\Spil Projekter\SurvivalShooter\Library\PackageCache\com.unity.xr.legacyinputhelpers@2.1.9
       assetPath: Packages/com.unity.xr.legacyinputhelpers
       name: com.unity.xr.legacyinputhelpers
       displayName: XR Legacy Input Helpers
@@ -1526,7 +1523,6 @@ m_PackageAssets:
         - 2.1.8
         - 2.1.9
         compatible:
-        - 2.1.8
         - 2.1.9
         verified: 2.1.9
       dependencies:
@@ -1563,13 +1559,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637623088970000000
+      datePublishedTicks: 637812095140000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.xr.legacyinputhelpers.git
-        revision: ed3b32c709a0e51cf73fda4b200c59b48955c4be
+        revision: 8e4581a11c14b64d41aabb67f51b0d8a0c75f5c4
         path: 
     - packageId: com.unity.modules.ai@1.0.0
       testable: 0
@@ -3422,4 +3418,4 @@ m_PackageAssets:
   m_LocalPackages:
     m_LocalFileStatus: []
 m_ProjectPath: D:/Spil Projekter/SurvivalShooter/Packages
-m_EditorVersion: 2020.3.30f1 (1fb1bf06830e)
+m_EditorVersion: 2020.3.31f1 (6b54b7616050)

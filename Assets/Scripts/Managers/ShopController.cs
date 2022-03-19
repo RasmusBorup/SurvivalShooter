@@ -137,6 +137,7 @@ public class ShopController : MonoBehaviour
 		magazineSizePrice += magazineSizePriceIncrease;
 		upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
 		playerShooting.magazineSize += magazineSizeIncrease;
+		playerShooting.UpdateAmmoCounter();
 	}
 
 	public void HealthUpgrade()

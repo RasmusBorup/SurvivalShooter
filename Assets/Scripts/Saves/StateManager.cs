@@ -5,12 +5,19 @@ using UnityEngine;
 
 public static class StateManager
 {
-    public static int CurrentScore {get; set;}
-    public static int ShootDamageUpgrades{get; set;}
-    public static int ShootSpeedUpgrades {get; set;}
-    public static int MagazineSizeUpgrades {get; set;}
-    public static int HealthUpgrades {get; set;}
-    static string saveDestination = Application.persistentDataPath + "/save.json";
+    public static int CurrentScore {get; set;} = 0;
+    public static int ShootDamageUpgrades{get; set;} = 0;
+    public static int ShootSpeedUpgrades {get; set;} = 0;
+    public static int MagazineSizeUpgrades {get; set;} = 0;
+    public static int HealthUpgrades {get; set;} = 0;
+    static string saveDestination = Application.persistentDataPath + "/saves";
+
+    public static void CreateGame(string fileName)
+    {
+        saveDestination = Application.persistentDataPath + "/saves/" + fileName;
+
+        Save();
+    }
 
     public static void Save()
     {
@@ -22,12 +29,13 @@ public static class StateManager
         saveFile.healthUpgrades = HealthUpgrades;
         
         string json = UnityEngine.JsonUtility.ToJson(saveFile); 
+        Directory.CreateDirectory(Application.persistentDataPath + "/saves");
         File.WriteAllText(saveDestination, json);
     }
 
     public static void Load(string fileName)
     {
-        saveDestination = Application.persistentDataPath + "/" + fileName;
+        saveDestination = Application.persistentDataPath + "/saves/" + fileName;
         string json = File.ReadAllText(saveDestination);
         SaveFile saveFile = UnityEngine.JsonUtility.FromJson<SaveFile>(json);
 

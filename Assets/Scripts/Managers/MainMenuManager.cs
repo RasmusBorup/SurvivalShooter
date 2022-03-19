@@ -13,28 +13,49 @@ public class MainMenuManager : MonoBehaviour
 	[SerializeField]
 	GameObject loadButtons;
 	[SerializeField]
+	GameObject newGame;
+	[SerializeField]
+	GameObject newGameNameInput;
+	[SerializeField]
+	Button newGameStartButton;
+	[SerializeField]
 	Button buttonPrefab;
 
-	public void StartGame()
+	public void NewGame()
 	{
+		buttons.SetActive(false);
+		newGame.SetActive(true);
+	}
+
+	public void StartNewGame()
+	{
+		string saveName = newGameNameInput.GetComponentInChildren<Text>().text;
+
+		StateManager.CreateGame(saveName);
+		StartGame(saveName);
+	}
+
+	public void StartGame(string saveName)
+	{
+		StateManager.Load(saveName);
 		SceneManager.LoadScene ("Level 01");
 		Time.timeScale = 1;
 	}
 
 	public void Load()
 	{
-		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath);
+		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/saves");
 		buttons.SetActive(false);
 		loadButtons.SetActive(true);
 		int yPosition = 250;
 
 		foreach(string file in saveFiles) {
+			string saveName = Path.GetFileName(file);
 			Button saveFileButton = Instantiate(buttonPrefab);
-			saveFileButton.GetComponentInChildren<Text>().text = Path.GetFileName(file);
+			saveFileButton.GetComponentInChildren<Text>().text = saveName;
 			saveFileButton.transform.SetParent(loadButtons.transform);
 			saveFileButton.transform.localPosition = new Vector3(0, yPosition, 0);
-			saveFileButton.onClick.AddListener(() => StateManager.Load(Path.GetFileName(file)));
-			saveFileButton.onClick.AddListener(StartGame);
+			saveFileButton.onClick.AddListener(() => StartGame(saveName));
 
 			yPosition -= 50;
 		}
