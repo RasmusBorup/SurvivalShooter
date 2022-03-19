@@ -20,11 +20,20 @@ public class MainMenuManager : MonoBehaviour
 	Button newGameStartButton;
 	[SerializeField]
 	Button buttonPrefab;
+	GameObject backButton;
+
+	void Awake()
+	{
+		Debug.Log("Rab");
+		backButton = GameObject.Find("BackButton");
+		backButton.SetActive(false);
+	}
 
 	public void NewGame()
 	{
 		buttons.SetActive(false);
 		newGame.SetActive(true);
+		backButton.SetActive(true);
 	}
 
 	public void StartNewGame()
@@ -47,6 +56,7 @@ public class MainMenuManager : MonoBehaviour
 		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/saves");
 		buttons.SetActive(false);
 		loadButtons.SetActive(true);
+		backButton.SetActive(true);
 		int yPosition = 250;
 
 		foreach(string file in saveFiles) {
@@ -59,6 +69,14 @@ public class MainMenuManager : MonoBehaviour
 
 			yPosition -= 50;
 		}
+	}
+
+	public void ShowMainMenu()
+	{
+		buttons.SetActive(true);
+		loadButtons.SetActive(false);
+		newGame.SetActive(false);
+		backButton.SetActive(false);
 	}
 
 	public void Quit()

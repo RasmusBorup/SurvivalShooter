@@ -28,13 +28,11 @@ public class EnemyAttack : MonoBehaviour
 	}
 
     //Should be able to make this less messy
-    IEnumerator OnTriggerEnter (Collider other)
+    void OnTriggerEnter (Collider other)
     {
-        playerInRange = true;
-        while(playerInRange && other.gameObject == player && playerHealth.currentHealth > 0) {
-            yield return playerInRange = true;
+        if (other.gameObject == player) {
+            playerInRange = true;
         }
-        playerInRange = false;
     }
 
     void OnTriggerExit (Collider other)
