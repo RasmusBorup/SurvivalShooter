@@ -64,8 +64,8 @@ public class EnemyManager : MonoBehaviour
 
 		// Spawn new wave
 		StartCoroutine(SpawnEnemy(enemy1, spawnPoints1, timeBetweenSpawns1, 1));
-		StartCoroutine(SpawnEnemy(enemy2, spawnPoints2, timeBetweenSpawns2, 2));
-		StartCoroutine(SpawnEnemy(enemy3, spawnPoints3, timeBetweenSpawns3, 3));
+		StartCoroutine(SpawnEnemy(enemy2, spawnPoints2, timeBetweenSpawns2, 3));
+		StartCoroutine(SpawnEnemy(enemy3, spawnPoints3, timeBetweenSpawns3, 5));
 	}
 
     IEnumerator SpawnEnemy (GameObject enemy, Transform[] spawnPoints, float timeBetweenSpawns, int startWave)
@@ -75,7 +75,7 @@ public class EnemyManager : MonoBehaviour
 			yield break;
 		}
 
-		int amount = (int)System.Math.Pow(2, waveNumber - startWave + 1);
+		int amount = (int)System.Math.Pow(2, waveNumber - startWave + 2);
 
 		for (int i = 0; i < amount; i++) {
 			yield return new WaitForSeconds(timeBetweenSpawns);

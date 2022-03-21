@@ -44,10 +44,10 @@ public class ShopController : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealth> ();
 		playerShooting = player.GetComponentInChildren<PlayerShooting> ();
-		upgradeDamageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
-		upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
-		upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
-		upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
+		// upgradeDamageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
+		// upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
+		// upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
+		// upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
 		restoreHealthButton.GetComponentInChildren<Text> ().text = "Restore \n" + restoreHealthPrice + " Health \n\n Price: \n" + restoreHealthPrice;
 	}
 	
@@ -99,56 +99,56 @@ public class ShopController : MonoBehaviour
 		shop.gameObject.SetActive (false);
 	}
 
-	public void DamageUpgrade()
-	{
-		if (ScoreManager.score >= damagePrice) {
-			ScoreManager.score -= damagePrice;
-			damagePrice += damagePriceIncrease;
-			upgradeDamageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
-			playerShooting.damagePerShot += damageIncrease;
-		}
-	}
+	// public void DamageUpgrade()
+	// {
+	// 	if (StateManager.CurrentScore >= damagePrice) {
+	// 		StateManager.CurrentScore -= damagePrice;
+	// 		damagePrice += damagePriceIncrease;
+	// 		upgradeDamageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
+	// 		playerShooting.damagePerShot += damageIncrease;
+	// 	}
+	// }
 
-	public void FireRateUpgrade()
-	{
-		if (ScoreManager.score >= fireRatePrice) {
-			ScoreManager.score -= fireRatePrice;
-			fireRatePrice += fireRatePriceIncrease;
-			upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
-			playerShooting.timeBetweenBullets /= fireRateIncrease;
-		}
-	}
+	// public void FireRateUpgrade()
+	// {
+	// 	if (StateManager.CurrentScore >= fireRatePrice) {
+	// 		StateManager.CurrentScore -= fireRatePrice;
+	// 		fireRatePrice += fireRatePriceIncrease;
+	// 		upgradeFireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n FireRate \n\n Price: \n" + fireRatePrice;
+	// 		playerShooting.fireRate /= fireRateIncrease;
+	// 	}
+	// }
 
-	public void MagazineSizeUpgrade()
-	{
-		if (ScoreManager.score < magazineSizePrice) {
-			return;
-		}
+	// public void MagazineSizeUpgrade()
+	// {
+	// 	if (StateManager.CurrentScore < magazineSizePrice) {
+	// 		return;
+	// 	}
 
-		ScoreManager.score -= magazineSizePrice;
-		magazineSizePrice += magazineSizePriceIncrease;
-		upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
-		playerShooting.magazineSize += magazineSizeIncrease;
-		playerShooting.UpdateAmmoCounter();
-	}
+	// 	StateManager.CurrentScore -= magazineSizePrice;
+	// 	magazineSizePrice += magazineSizePriceIncrease;
+	// 	upgradeMagazineSizeButton.GetComponentInChildren<Text>().text = "Upgrade \n Magazine Size \n\n Price: \n" + magazineSizePrice;
+	// 	playerShooting.magazineSize += magazineSizeIncrease;
+	// 	playerShooting.UpdateAmmoCounter();
+	// }
 
-	public void HealthUpgrade()
-	{
-		if (ScoreManager.score >= healthPrice) {
-			ScoreManager.score -= healthPrice;
-			healthPrice += healthPriceIncrease;
-			upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
-			playerHealth.startingHealth += healthIncrease;
-			playerHealth.currentHealth += healthIncrease;
-		}
-	}
+	// public void HealthUpgrade()
+	// {
+	// 	if (StateManager.CurrentScore >= healthPrice) {
+	// 		StateManager.CurrentScore -= healthPrice;
+	// 		healthPrice += healthPriceIncrease;
+	// 		upgradeHealthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Health \n\n Price: \n" + healthPrice;
+	// 		playerHealth.startingHealth += healthIncrease;
+	// 		playerHealth.currentHealth += healthIncrease;
+	// 	}
+	// }
 
 	public void RestoreHealth()
 	{
-		if (ScoreManager.score >= restoreHealthPrice) {
+		if (StateManager.CurrentScore >= restoreHealthPrice) {
 			if(playerHealth.currentHealth < playerHealth.startingHealth)
 			{
-				ScoreManager.score -= restoreHealthPrice;
+				StateManager.CurrentScore -= restoreHealthPrice;
 				if(playerHealth.currentHealth <= playerHealth.startingHealth - restoreHealthAmount)
 				{
 					playerHealth.currentHealth += restoreHealthAmount;

@@ -36,23 +36,6 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-//	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-//	{
-//		if (stream.isWriting) 
-//		{
-//			int syncHealth = currentHealth;
-//			stream.Serialize(ref syncHealth);
-//			Debug.Log("Syncing Health sending");
-//		} 
-//		else 
-//		{
-//			int syncHealth = 0;
-//			stream.Serialize(ref syncHealth);
-//			currentHealth = syncHealth;
-//			Debug.Log("Syncing Health receiving");
-//		}
-//	}
-
     public void TakeDamage (int amount, Vector3 hitPoint)
     {
         if(isDead)
@@ -71,7 +54,6 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-
     void Death ()
     {
         isDead = true;
@@ -84,13 +66,12 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play ();
     }
 
-
     public void StartSinking ()
     {
         GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
-        ScoreManager.score += scoreValue;
+        StateManager.CurrentScore += scoreValue;
         Destroy (gameObject, 2f);
     }
 }

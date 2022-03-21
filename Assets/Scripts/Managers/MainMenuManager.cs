@@ -46,7 +46,7 @@ public class MainMenuManager : MonoBehaviour
 	public void StartGame(string saveName)
 	{
 		StateManager.Load(saveName);
-		SceneManager.LoadScene ("Level 01");
+		SceneManager.LoadScene ("Shop");
 		Time.timeScale = 1;
 	}
 

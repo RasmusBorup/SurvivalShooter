@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec45203ae7a1a54c9d02c355f983833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 3
 --- !u!114 &11484342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5545,9 +5545,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerShot: 20
-  timeBetweenBullets: 0.5
-  range: 100
-  shotOrigin: 1
+  damageIncrease: 1
+  fireRate: 0.5
+  fireRateModifier: 0.95
   magazineSize: 5
   reloadTime: 4
-  reloadTimer: 0
+  reloadModifier: 0.95
+  range: 100
+  shotOrigin: 1

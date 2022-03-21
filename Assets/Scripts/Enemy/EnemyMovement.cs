@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
     EnemyHealth enemyHealth;
     UnityEngine.AI.NavMeshAgent nav;
 
-
     void Awake ()
 	{
 		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;

@@ -4,11 +4,14 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
-    public float timeBetweenBullets = 0.5f;
-    public float range = 100f;
-	public float shotOrigin = 1;
+	public int damageIncrease = 1;
+    public float fireRate = 0.5f;
+    public float fireRateModifier = 0.95f;
     public int magazineSize = 5;
     public float reloadTime = 5f;
+    public float reloadModifier = 0.95f;
+    public float range = 100f;
+	public float shotOrigin = 1;
 
 
     float timer;
@@ -22,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
     float effectsDisplayTime = 0.05f;
     bool isReloading;
     int bulletsLeftInMagazine;
-    public float reloadTimer;
+    float reloadTimer;
 	Slider reloadSlider;
     Text ammoText;
     ShopController shopController;
@@ -41,21 +44,24 @@ public class PlayerShooting : MonoBehaviour
         
         shootRay = new Ray();
         isReloading = false;
+        reloadTimer = 0;
+        damagePerShot = damagePerShot + (StateManager.DamageUpgrades * damageIncrease);
+        fireRate = fireRate * (float)System.Math.Pow(fireRateModifier, StateManager.FireRateUpgrades);
+        magazineSize = magazineSize + StateManager.MagazineSizeUpgrades;
+        reloadTime = reloadTime * (float)System.Math.Pow(reloadModifier, StateManager.ReloadSpeedUpgrades);
         bulletsLeftInMagazine = magazineSize;
         UpdateAmmoCounter();
-        reloadTimer = 0;
     }
-
 
     void Update ()
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0) {
+		if(Input.GetButton ("Fire1") && timer >= fireRate && Time.timeScale != 0) {
 			Shoot();
         }
 
-        if(timer >= timeBetweenBullets * effectsDisplayTime) {
+        if(timer >= fireRate * effectsDisplayTime) {
             DisableEffects();
         }
 

@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
 {
 	public int startingHealth = 100;
 	public int currentHealth;
+
+    public int healthIncrease = 10;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -19,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
     PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
-
 
     void Awake ()
 	{
@@ -35,13 +36,13 @@ public class PlayerHealth : MonoBehaviour
 		playerAudio = GetComponentInChildren <AudioSource> ();
 		playerMovement = GetComponentInChildren <PlayerMovement> ();
 		playerShooting = GetComponentInChildren <PlayerShooting> ();
+        startingHealth = startingHealth + StateManager.HealthUpgrades * healthIncrease;
 		currentHealth = startingHealth;
     }
 
 	void Start()
 	{
 	}
-
 
     void Update ()
     {
@@ -68,7 +69,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
     void Death ()
     {
         isDead = true;
@@ -83,10 +83,4 @@ public class PlayerHealth : MonoBehaviour
         playerMovement.enabled = false;
         playerShooting.enabled = false;
     }
-
-
-//    public void RestartLevel ()
-//    {
-//        Application.LoadLevel (Application.loadedLevel);
-//    }
 }

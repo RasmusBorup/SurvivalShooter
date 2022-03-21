@@ -3,6 +3,7 @@
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;
+	float speedIncrease = 0.1f;
 
 	private Vector3 movement;
 	private Vector3 mouseMovement;
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 		floorMask = LayerMask.GetMask ("Floor");
 		anim = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
+		speed = speed + speedIncrease * StateManager.MoveSpeedUpgrades;
 	}
 
 	void FixedUpdate()
