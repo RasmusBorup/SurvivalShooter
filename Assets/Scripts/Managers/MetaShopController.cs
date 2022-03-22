@@ -4,12 +4,16 @@ using UnityEngine.UI;
 
 public class MetaShopController : MonoBehaviour 
 {
-	public int damagePriceIncrease = 50;
-	public int fireRatePriceIncrease = 50;
-	public int magazinePriceIncrease = 50;
-	public int reloadSpeedPriceIncrease = 50;
-	public int healthPriceIncrease = 50;
-	public int moveSpeedPriceIncrease = 50;
+	int damagePriceIncrease = 50;
+	int fireRatePriceIncrease = 50;
+	int magazinePriceIncrease = 50;
+	int reloadSpeedPriceIncrease = 50;
+	int healthPriceIncrease = 50;
+	int moveSpeedPriceIncrease = 50;
+	int greedPriceIncrease = 200;
+	int critChancePriceIncrease = 500;
+	int critMultiplierPriceIncrease = 500;
+	int regenPriceIncrease = 1000;
 
 	Button damageButton;
 	Button fireRateButton;
@@ -17,27 +21,52 @@ public class MetaShopController : MonoBehaviour
 	Button healthButton;
 	Button reloadSpeedButton;
 	Button moveSpeedButton;
+	Button greedButton;
+	Button regenButton;
+	Button critChanceButton;
+	Button critMultiplierButton;
 	
 	void Start () 
 	{
 		damageButton = GameObject.Find("UpgradeDamageButton").GetComponent<Button>();
 		UpdateButtonText(damageButton, "Damage", CalculatePrice(damagePriceIncrease, StateManager.DamageUpgrades));
 		damageButton.onClick.AddListener(UpgradeDamage);
+
 		fireRateButton = GameObject.Find("UpgradeFireRateButton").GetComponent<Button>();
 		UpdateButtonText(fireRateButton, "Firerate", CalculatePrice(fireRatePriceIncrease, StateManager.FireRateUpgrades));
 		fireRateButton.onClick.AddListener(UpgradeFireRate);
+
 		magazineSizeButton = GameObject.Find("UpgradeMagazineSizeButton").GetComponent<Button>();
 		UpdateButtonText(magazineSizeButton, "Magazine", CalculatePrice(magazinePriceIncrease, StateManager.MagazineSizeUpgrades));
 		magazineSizeButton.onClick.AddListener(UpgradeMagazine);
+
 		healthButton = GameObject.Find("UpgradeHealthButton").GetComponent<Button>();
 		UpdateButtonText(healthButton, "Health", CalculatePrice(healthPriceIncrease, StateManager.HealthUpgrades));
 		healthButton.onClick.AddListener(UpgradeHealth);
-		reloadSpeedButton = GameObject.Find("ReloadSpeedButton").GetComponent<Button>();
+
+		reloadSpeedButton = GameObject.Find("UpgradeReloadSpeedButton").GetComponent<Button>();
 		UpdateButtonText(reloadSpeedButton, "Reload Speed", CalculatePrice(reloadSpeedPriceIncrease, StateManager.ReloadSpeedUpgrades));
 		reloadSpeedButton.onClick.AddListener(UpgradeReload);
+
 		moveSpeedButton = GameObject.Find("UpgradeMoveSpeedButton").GetComponent<Button>();
 		UpdateButtonText(moveSpeedButton, "Movement Speed", CalculatePrice(moveSpeedPriceIncrease, StateManager.MoveSpeedUpgrades));
 		moveSpeedButton.onClick.AddListener(UpgradeMoveSpeed);
+
+		greedButton = GameObject.Find("UpgradeGreedButton").GetComponent<Button>();
+		UpdateButtonText(greedButton, "Greed", CalculatePrice(greedPriceIncrease, StateManager.GreedUpgrades));
+		greedButton.onClick.AddListener(UpgradeGreed);
+		
+		regenButton = GameObject.Find("UpgradeRegenButton").GetComponent<Button>();
+		UpdateButtonText(regenButton, "Regen", CalculatePrice(regenPriceIncrease, StateManager.RegenUpgrades));
+		regenButton.onClick.AddListener(UpgradeRegen);
+		
+		critChanceButton = GameObject.Find("UpgradeCritChanceButton").GetComponent<Button>();
+		UpdateButtonText(critChanceButton, "Critical Chance", CalculatePrice(critChancePriceIncrease, StateManager.CritChanceUpgrades));
+		critChanceButton.onClick.AddListener(UpgradeCritChance);
+		
+		critMultiplierButton = GameObject.Find("UpgradeCritMultiplierButton").GetComponent<Button>();
+		UpdateButtonText(critMultiplierButton, "Critical Multiplier", CalculatePrice(critMultiplierPriceIncrease, StateManager.CritMultiplierUpgrades));
+		critMultiplierButton.onClick.AddListener(UpgradeCritMultiplier);
 	}
 
     void Awake()
@@ -74,7 +103,7 @@ public class MetaShopController : MonoBehaviour
 			StateManager.CurrentScore -= damagePrice;
 			StateManager.DamageUpgrades++;
 			damagePrice += damagePriceIncrease;
-			damageButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + damagePrice;
+			UpdateButtonText(damageButton, "Damage", damagePrice);
 		}
 	}
 
@@ -86,7 +115,7 @@ public class MetaShopController : MonoBehaviour
 			StateManager.CurrentScore -= fireRatePrice;
 			StateManager.FireRateUpgrades++;
 			fireRatePrice += fireRatePriceIncrease;
-			fireRateButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + fireRatePrice;
+			UpdateButtonText(fireRateButton, "Firerate", fireRatePrice);
 		}
 	}
 
@@ -98,7 +127,7 @@ public class MetaShopController : MonoBehaviour
 			StateManager.CurrentScore -= magazinePrice;
 			StateManager.MagazineSizeUpgrades++;
 			magazinePrice += magazinePriceIncrease;
-			magazineSizeButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + magazinePrice;
+			UpdateButtonText(magazineSizeButton, "Magazine", magazinePrice);
 		}
 	}
 
@@ -110,7 +139,7 @@ public class MetaShopController : MonoBehaviour
 			StateManager.CurrentScore -= reloadPrice;
 			StateManager.ReloadSpeedUpgrades++;
 			reloadPrice += reloadSpeedPriceIncrease;
-			reloadSpeedButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + reloadPrice;
+			UpdateButtonText(reloadSpeedButton, "Reload Speed", reloadPrice);
 		}
 	}
 
@@ -122,7 +151,7 @@ public class MetaShopController : MonoBehaviour
 			StateManager.CurrentScore -= healthPrice;
 			StateManager.HealthUpgrades++;
 			healthPrice += healthPriceIncrease;
-			healthButton.GetComponentInChildren<Text> ().text = "Upgrade \n Damage \n\n Price: \n" + healthPrice;
+			UpdateButtonText(healthButton, "Health", healthPrice);
 		}
 	}
 
@@ -135,6 +164,54 @@ public class MetaShopController : MonoBehaviour
 			StateManager.MoveSpeedUpgrades++;
 			moveSpeedPrice += moveSpeedPriceIncrease;
 			UpdateButtonText(moveSpeedButton, "Movement Speed", moveSpeedPrice);
+		}
+	}
+
+	void UpgradeGreed()
+	{
+		int greedPrice = CalculatePrice(greedPriceIncrease, StateManager.GreedUpgrades);
+		 
+		if (StateManager.CurrentScore >= greedPrice) {
+			StateManager.CurrentScore -= greedPrice;
+			StateManager.GreedUpgrades++;
+			greedPrice += greedPriceIncrease;
+			UpdateButtonText(greedButton, "Greed", greedPrice);
+		}
+	}
+
+	void UpgradeRegen()
+	{
+		int regenPrice = CalculatePrice(regenPriceIncrease, StateManager.RegenUpgrades);
+		 
+		if (StateManager.CurrentScore >= regenPrice) {
+			StateManager.CurrentScore -= regenPrice;
+			StateManager.RegenUpgrades++;
+			regenPrice += regenPriceIncrease;
+			UpdateButtonText(regenButton, "Regen", regenPrice);
+		}
+	}
+
+	void UpgradeCritChance()
+	{
+		int critChancePrice = CalculatePrice(critChancePriceIncrease, StateManager.CritChanceUpgrades);
+		 
+		if (StateManager.CurrentScore >= critChancePrice) {
+			StateManager.CurrentScore -= critChancePrice;
+			StateManager.CritChanceUpgrades++;
+			critChancePrice += critChancePriceIncrease;
+			UpdateButtonText(critChanceButton, "Critical Chance", critChancePrice);
+		}
+	}
+
+	void UpgradeCritMultiplier()
+	{
+		int critMultiplierPrice = CalculatePrice(critMultiplierPriceIncrease, StateManager.CritMultiplierUpgrades);
+		 
+		if (StateManager.CurrentScore >= critMultiplierPrice) {
+			StateManager.CurrentScore -= critMultiplierPrice;
+			StateManager.CritMultiplierUpgrades++;
+			critMultiplierPrice += critMultiplierPriceIncrease;
+			UpdateButtonText(critMultiplierButton, "Critical Multiplier", critMultiplierPrice);
 		}
 	}
 }

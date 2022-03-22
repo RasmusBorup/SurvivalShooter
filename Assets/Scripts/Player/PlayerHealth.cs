@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 
-    public int healthIncrease = 10;
+    int healthIncrease = 10;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
