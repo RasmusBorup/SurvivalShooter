@@ -21,6 +21,17 @@ public static class StateManager
     public static void CreateGame(string fileName)
     {
         saveDestination = Application.persistentDataPath + "/saves/" + fileName;
+        CurrentScore = 100;
+        DamageUpgrades = 0;
+        FireRateUpgrades = 0;
+        MagazineSizeUpgrades = 0;
+        ReloadSpeedUpgrades = 0;
+        HealthUpgrades = 0;
+        MoveSpeedUpgrades = 0;
+        GreedUpgrades = 0;
+        RegenUpgrades = 0;
+        CritChanceUpgrades = 0;
+        CritMultiplierUpgrades = 0;
 
         Save();
     }

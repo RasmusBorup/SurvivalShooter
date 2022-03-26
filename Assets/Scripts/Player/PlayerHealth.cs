@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     int healthIncrease = 10;
     float regenIncrease = 0.1f;
     float regenTimer;
-    float regenAccumulator;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -40,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
         startingHealth = startingHealth + StateManager.HealthUpgrades * healthIncrease;
 		currentHealth = startingHealth;
         regenTimer = 0;
-        regenAccumulator = 0;
     }
 
 	void Start()
