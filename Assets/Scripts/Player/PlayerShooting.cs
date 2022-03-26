@@ -3,13 +3,16 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public int damagePerShot = 20;
+    public int baseDamage = 20;
 	public int damageIncrease = 1;
     public float fireRate = 0.5f;
     public float fireRateModifier = 0.95f;
     public int magazineSize = 5;
     public float reloadTime = 5f;
     public float reloadModifier = 0.95f;
+    int critChanceIncrease = 5;
+    float critMultiplierIncrease = 0.25f;
+
     public float range = 100f;
 	public float shotOrigin = 1;
 
@@ -45,7 +48,7 @@ public class PlayerShooting : MonoBehaviour
         shootRay = new Ray();
         isReloading = false;
         reloadTimer = 0;
-        damagePerShot = damagePerShot + (StateManager.DamageUpgrades * damageIncrease);
+        baseDamage = baseDamage + (StateManager.DamageUpgrades * damageIncrease);
         fireRate = fireRate * (float)System.Math.Pow(fireRateModifier, StateManager.FireRateUpgrades);
         magazineSize = magazineSize + StateManager.MagazineSizeUpgrades;
         reloadTime = reloadTime * (float)System.Math.Pow(reloadModifier, StateManager.ReloadSpeedUpgrades);
@@ -101,7 +104,7 @@ public class PlayerShooting : MonoBehaviour
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
 
             if(enemyHealth != null) {
-                enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                enemyHealth.TakeDamage (CalculateDamage(), shootHit.point);
             }
         } else {
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
@@ -149,5 +152,17 @@ public class PlayerShooting : MonoBehaviour
     public void UpdateAmmoCounter()
     {
         ammoText.text = bulletsLeftInMagazine + "/" + magazineSize;
+    }
+
+    int CalculateDamage()
+    {
+        bool isCrit = Random.Range(0, 99) < critChanceIncrease * StateManager.CritChanceUpgrades;
+        int damage = baseDamage;
+
+        if (isCrit) {
+            damage = baseDamage * (int)(1 + critMultiplierIncrease * StateManager.CritMultiplierUpgrades);
+        }
+
+        return damage;
     }
 }
