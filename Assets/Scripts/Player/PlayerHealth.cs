@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -51,28 +50,7 @@ public class PlayerHealth : MonoBehaviour
     void Update ()
     {
         healthText.text = currentHealth + "/" + startingHealth;
-        // regenTimer += Time.deltaTime;
-
-        // if (regenTimer >= 1) {
-        //     regenTimer = 0;
-
-        //     if (currentHealth < startingHealth) {
-        //         regenAccumulator += regenIncrease * StateManager.RegenUpgrades;
-        //         print("Accumulating " + regenAccumulator);
-                
-        //         if (regenAccumulator >= 1) {
-        //             int regen = (int)System.Math.Floor(regenAccumulator);
-        //             int missingHealth = startingHealth - currentHealth;
-
-        //             currentHealth = missingHealth < regen ? startingHealth : currentHealth + regen;
-
-        //             regenAccumulator = 0;
-        //         }
-        //     } else {
-        //         regenAccumulator = 0;
-        //     }
-        // }
-
+        
         if (currentHealth < startingHealth) {
             regenTimer += Time.deltaTime;
 
