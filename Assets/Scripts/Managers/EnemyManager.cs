@@ -17,21 +17,15 @@ public class EnemyManager : MonoBehaviour
 	Transform[] spawnPoints2;
 	[SerializeField]
 	Transform[] spawnPoints3;
-	[SerializeField]
-	float timeBetweenSpawns1 = 2f;
-	[SerializeField]
-	float timeBetweenSpawns2 = 2f;
-	[SerializeField]
-	float timeBetweenSpawns3 = 5f;
-	[SerializeField]
-	float timeBetweenWaves = 5f;
-	[SerializeField]
-	float nightAnimationTime;
+	float timeBetweenSpawns1 = 1f;
+	float timeBetweenSpawns2 = 4f;
+	float timeBetweenSpawns3 = 16f;
+	public int enemiesAlive = 0;
+	float timeBetweenWaves = 3f;
+	float nightAnimationTime = 2f;
 
 	Animator anim;
 	Text nightText;
-	bool everythingKilled;
-	bool waveDone;
 	int waveNumber;
 	int stillSpawning;
 	#endregion
@@ -40,18 +34,12 @@ public class EnemyManager : MonoBehaviour
 	{
         waveNumber = 0;
 		nightText = GameObject.Find ("NightText").GetComponent<Text> ();
-		GameObject nightImage = GameObject.Find ("NightImage");
-		waveDone = true;
-
-		if(nightImage) {
-			anim = nightImage.GetComponent<Animator> ();
-		}
+		anim = GameObject.Find ("NightImage").GetComponent<Animator> ();
     }
 
 	IEnumerator SpawnWaves()
 	{
 		// Increment Night
-		waveDone = false;
 		waveNumber++;
 		nightText.text = "Night " + waveNumber;
 		stillSpawning = 3;
@@ -78,11 +66,10 @@ public class EnemyManager : MonoBehaviour
 		int amount = (int)System.Math.Pow(2, waveNumber - startWave + 2);
 
 		for (int i = 0; i < amount; i++) {
-			yield return new WaitForSeconds(timeBetweenSpawns);
+			yield return new WaitForSeconds((timeBetweenSpawns + enemiesAlive) / 10);
 
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 			Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-			everythingKilled = false;
 		}
 
 		stillSpawning--;
@@ -90,15 +77,7 @@ public class EnemyManager : MonoBehaviour
 
 	void Update()
 	{
-		if (GameObject.FindWithTag ("Enemy") == null) {
-			everythingKilled = true;
-		}
-
-		if (everythingKilled && stillSpawning == 0) {
-			waveDone = true;
-		}
-
-		if (waveDone) {
+		if (enemiesAlive == 0 && stillSpawning == 0) {
 			StartCoroutine(SpawnWaves());
 		}
 	}

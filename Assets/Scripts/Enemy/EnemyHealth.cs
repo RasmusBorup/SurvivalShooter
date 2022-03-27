@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     CapsuleCollider capsuleCollider;
     bool isDead;
     bool isSinking;
+    GameObject enemyManager;
 
 
     void Awake ()
@@ -23,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+        enemyManager = GameObject.Find("EnemyManager");
+        enemyManager.GetComponent<EnemyManager>().enemiesAlive++;
 
         currentHealth = startingHealth;
     }
@@ -59,6 +62,7 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
 
         capsuleCollider.isTrigger = true;
+        enemyManager.GetComponent<EnemyManager>().enemiesAlive--;
 
         anim.SetTrigger ("Dead");
 

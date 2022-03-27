@@ -1,2 +1,4 @@
 # Starting compiling Assembly-CSharp.dll
-D:\Program Files (x86)\Unity Hub\Editor\2020.3.32f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-40e31a379a2251e4c8e9a2095b85afcf
+D:\Program Files (x86)\Unity Hub\Editor\2020.3.32f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-928ed91d95a1f8b49aa744ad38f1da5d
+# Starting compiling Assembly-CSharp-Editor.dll
+D:\Program Files (x86)\Unity Hub\Editor\2020.3.32f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-2f4a1a696150fb542a9df5a57885f7c6

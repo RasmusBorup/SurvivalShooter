@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     public float reloadTime = 5f;
     public float reloadModifier = 0.95f;
     int critChanceIncrease = 5;
-    float critMultiplierIncrease = 0.25f;
+    float critMultiplierIncrease = 0.50f;
 
     public float range = 100f;
 	public float shotOrigin = 1;
@@ -160,7 +160,7 @@ public class PlayerShooting : MonoBehaviour
         int damage = baseDamage;
 
         if (isCrit) {
-            damage = baseDamage * (int)(1 + critMultiplierIncrease * StateManager.CritMultiplierUpgrades);
+            damage = baseDamage * (int)(2 + critMultiplierIncrease * StateManager.CritMultiplierUpgrades);
         }
 
         return damage;

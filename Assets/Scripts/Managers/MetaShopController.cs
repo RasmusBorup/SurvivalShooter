@@ -12,7 +12,7 @@ public class MetaShopController : MonoBehaviour
 	int moveSpeedPriceIncrease = 50;
 	int greedPriceIncrease = 200;
 	int critChancePriceIncrease = 500;
-	int critMultiplierPriceIncrease = 500;
+	int critMultiplierPriceIncrease = 1000;
 	int regenPriceIncrease = 1000;
 
 	Button damageButton;
