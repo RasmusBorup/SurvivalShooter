@@ -21,11 +21,17 @@ public class MainMenuManager : MonoBehaviour
 	[SerializeField]
 	Button buttonPrefab;
 	GameObject backButton;
+	public GameObject optionsPanel;
+	Button optionsButton;
 
 	void Awake()
 	{
 		backButton = GameObject.Find("BackButton");
 		backButton.SetActive(false);
+		optionsButton = GameObject.Find("OptionsButton").GetComponent<Button>();
+		optionsButton.onClick.AddListener(ShowOptions);
+		optionsPanel.GetComponentInChildren<Button>().onClick.AddListener(SaveOptions);
+		ShowMainMenu();
 	}
 
 	public void NewGame()
@@ -70,11 +76,33 @@ public class MainMenuManager : MonoBehaviour
 		}
 	}
 
+	void ShowOptions()
+	{
+		buttons.SetActive(false);
+		backButton.SetActive(true);
+		optionsPanel.SetActive(true);
+		optionsPanel.transform.Find("MasterVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("masterVolume");
+		optionsPanel.transform.Find("MusicVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("musicVolume");
+		optionsPanel.transform.Find("GunVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("gunVolume");
+		optionsPanel.transform.Find("EnemyVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("enemyVolume");
+	}
+
+	void SaveOptions()
+	{
+		PlayerPrefs.SetFloat("masterVolume", optionsPanel.transform.Find("MasterVolumeSlider").GetComponentInChildren<Slider>().value);
+		PlayerPrefs.SetFloat("musicVolume", optionsPanel.transform.Find("MusicVolumeSlider").GetComponentInChildren<Slider>().value);
+		PlayerPrefs.SetFloat("gunVolume", optionsPanel.transform.Find("GunVolumeSlider").GetComponentInChildren<Slider>().value);
+		PlayerPrefs.SetFloat("enemyVolume", optionsPanel.transform.Find("EnemyVolumeSlider").GetComponentInChildren<Slider>().value);
+
+		PlayerPrefs.Save();
+	}
+
 	public void ShowMainMenu()
 	{
 		buttons.SetActive(true);
 		loadButtons.SetActive(false);
 		newGame.SetActive(false);
+		optionsPanel.SetActive(false);
 		backButton.SetActive(false);
 	}
 

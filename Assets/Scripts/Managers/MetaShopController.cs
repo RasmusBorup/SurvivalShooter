@@ -11,7 +11,7 @@ public class MetaShopController : MonoBehaviour
 	int healthPriceIncrease = 50;
 	int moveSpeedPriceIncrease = 50;
 	int greedPriceIncrease = 200;
-	int critChancePriceIncrease = 500;
+	int critChancePriceIncrease = 1000;
 	int critMultiplierPriceIncrease = 1000;
 	int regenPriceIncrease = 1000;
 

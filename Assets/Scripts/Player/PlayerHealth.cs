@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
     {
         healthText.text = currentHealth + "/" + startingHealth;
         
-        if (currentHealth < startingHealth) {
+        if (currentHealth < startingHealth && ! isDead) {
             regenTimer += Time.deltaTime;
 
             if (regenTimer >= 1 / (regenIncrease * StateManager.RegenUpgrades)) {

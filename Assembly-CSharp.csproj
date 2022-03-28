@@ -71,6 +71,7 @@
      <Compile Include="Assets\MobileInput\Scripts\MobileControlRig.cs" />
      <Compile Include="Assets\Scripts\Saves\SaveFile.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Helpers\RandomAnimationPoint.cs" />
+     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
      <None Include="Assets\Fonts\LuckiestGuy\LICENSE.txt" />
      <None Include="Assets\Shaders\Rim Lit Bumped Specular.shader" />
     <Reference Include="UnityEngine">

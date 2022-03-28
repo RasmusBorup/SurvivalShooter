@@ -69,7 +69,8 @@ public class EnemyManager : MonoBehaviour
 			yield return new WaitForSeconds((timeBetweenSpawns + enemiesAlive) / 10);
 
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
-			Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+			GameObject enemyObject = Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+			enemyObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("masterVolume") * PlayerPrefs.GetFloat("enemyVolume");
 		}
 
 		stillSpawning--;
