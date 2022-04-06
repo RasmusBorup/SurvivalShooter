@@ -28,44 +28,85 @@ public class MetaShopController : MonoBehaviour
 	
 	void Start () 
 	{
-		damageButton = GameObject.Find("UpgradeDamageButton").GetComponent<Button>();
-		UpdateButtonText(damageButton, "Damage", CalculatePrice(damagePriceIncrease, StateManager.DamageUpgrades));
-		damageButton.onClick.AddListener(UpgradeDamage);
-
-		fireRateButton = GameObject.Find("UpgradeFireRateButton").GetComponent<Button>();
-		UpdateButtonText(fireRateButton, "Firerate", CalculatePrice(fireRatePriceIncrease, StateManager.FireRateUpgrades));
-		fireRateButton.onClick.AddListener(UpgradeFireRate);
-
-		magazineSizeButton = GameObject.Find("UpgradeMagazineSizeButton").GetComponent<Button>();
-		UpdateButtonText(magazineSizeButton, "Magazine", CalculatePrice(magazinePriceIncrease, StateManager.MagazineSizeUpgrades));
-		magazineSizeButton.onClick.AddListener(UpgradeMagazine);
-
 		healthButton = GameObject.Find("UpgradeHealthButton").GetComponent<Button>();
+		healthButton.gameObject.SetActive(false);
+		fireRateButton = GameObject.Find("UpgradeFireRateButton").GetComponent<Button>();
+		fireRateButton.gameObject.SetActive(false);
+		moveSpeedButton = GameObject.Find("UpgradeMoveSpeedButton").GetComponent<Button>();
+		moveSpeedButton.gameObject.SetActive(false);
+		magazineSizeButton = GameObject.Find("UpgradeMagazineSizeButton").GetComponent<Button>();
+		magazineSizeButton.gameObject.SetActive(false);
+		damageButton = GameObject.Find("UpgradeDamageButton").GetComponent<Button>();
+		damageButton.gameObject.SetActive(false);
+		reloadSpeedButton = GameObject.Find("UpgradeReloadSpeedButton").GetComponent<Button>();
+		reloadSpeedButton.gameObject.SetActive(false);
+		greedButton = GameObject.Find("UpgradeGreedButton").GetComponent<Button>();
+		greedButton.gameObject.SetActive(false);
+		regenButton = GameObject.Find("UpgradeRegenButton").GetComponent<Button>();
+		regenButton.gameObject.SetActive(false);
+		critChanceButton = GameObject.Find("UpgradeCritChanceButton").GetComponent<Button>();
+		critChanceButton.gameObject.SetActive(false);
+		critMultiplierButton = GameObject.Find("UpgradeCritMultiplierButton").GetComponent<Button>();
+		critMultiplierButton.gameObject.SetActive(false);
+
 		UpdateButtonText(healthButton, "Health", CalculatePrice(healthPriceIncrease, StateManager.HealthUpgrades));
+		healthButton.gameObject.SetActive(true);
 		healthButton.onClick.AddListener(UpgradeHealth);
 
-		reloadSpeedButton = GameObject.Find("UpgradeReloadSpeedButton").GetComponent<Button>();
-		UpdateButtonText(reloadSpeedButton, "Reload Speed", CalculatePrice(reloadSpeedPriceIncrease, StateManager.ReloadSpeedUpgrades));
-		reloadSpeedButton.onClick.AddListener(UpgradeReload);
+		UpdateButtonText(fireRateButton, "Firerate", CalculatePrice(fireRatePriceIncrease, StateManager.FireRateUpgrades));
+		fireRateButton.gameObject.SetActive(true);
+		fireRateButton.onClick.AddListener(UpgradeFireRate);
 
-		moveSpeedButton = GameObject.Find("UpgradeMoveSpeedButton").GetComponent<Button>();
+		if (StateManager.WavesCleared < 1) {
+			return;
+		}
+
 		UpdateButtonText(moveSpeedButton, "Movement Speed", CalculatePrice(moveSpeedPriceIncrease, StateManager.MoveSpeedUpgrades));
+		moveSpeedButton.gameObject.SetActive(true);
 		moveSpeedButton.onClick.AddListener(UpgradeMoveSpeed);
 
-		greedButton = GameObject.Find("UpgradeGreedButton").GetComponent<Button>();
+		UpdateButtonText(magazineSizeButton, "Magazine", CalculatePrice(magazinePriceIncrease, StateManager.MagazineSizeUpgrades));
+		magazineSizeButton.gameObject.SetActive(true);
+		magazineSizeButton.onClick.AddListener(UpgradeMagazine);
+
+		if (StateManager.WavesCleared < 2) {
+			return;
+		}
+
+		UpdateButtonText(damageButton, "Damage", CalculatePrice(damagePriceIncrease, StateManager.DamageUpgrades));
+		damageButton.gameObject.SetActive(true);
+		damageButton.onClick.AddListener(UpgradeDamage);
+
+		UpdateButtonText(reloadSpeedButton, "Reload Speed", CalculatePrice(reloadSpeedPriceIncrease, StateManager.ReloadSpeedUpgrades));
+		reloadSpeedButton.gameObject.SetActive(true);
+		reloadSpeedButton.onClick.AddListener(UpgradeReload);
+
+		if (StateManager.WavesCleared < 3) {
+			return;
+		}
+
 		UpdateButtonText(greedButton, "Greed", CalculatePrice(greedPriceIncrease, StateManager.GreedUpgrades));
+		greedButton.gameObject.SetActive(true);
 		greedButton.onClick.AddListener(UpgradeGreed);
-		
-		regenButton = GameObject.Find("UpgradeRegenButton").GetComponent<Button>();
+
+		if (StateManager.WavesCleared < 4) {
+			return;
+		}
+
 		UpdateButtonText(regenButton, "Regen", CalculatePrice(regenPriceIncrease, StateManager.RegenUpgrades));
+		regenButton.gameObject.SetActive(true);
 		regenButton.onClick.AddListener(UpgradeRegen);
-		
-		critChanceButton = GameObject.Find("UpgradeCritChanceButton").GetComponent<Button>();
+
+		if (StateManager.WavesCleared < 5) {
+			return;
+		}
+
 		UpdateButtonText(critChanceButton, "Critical Chance", CalculatePrice(critChancePriceIncrease, StateManager.CritChanceUpgrades));
+		critChanceButton.gameObject.SetActive(true);
 		critChanceButton.onClick.AddListener(UpgradeCritChance);
 		
-		critMultiplierButton = GameObject.Find("UpgradeCritMultiplierButton").GetComponent<Button>();
 		UpdateButtonText(critMultiplierButton, "Critical Multiplier", CalculatePrice(critMultiplierPriceIncrease, StateManager.CritMultiplierUpgrades));
+		critMultiplierButton.gameObject.SetActive(true);
 		critMultiplierButton.onClick.AddListener(UpgradeCritMultiplier);
 	}
 

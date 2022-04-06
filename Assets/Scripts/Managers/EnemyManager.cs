@@ -47,6 +47,7 @@ public class EnemyManager : MonoBehaviour
 		// Animate Night
 		yield return new WaitForSeconds(timeBetweenWaves);
 		AnimateNight();
+		StateManager.WavesCleared = System.Math.Max(waveNumber - 1, StateManager.WavesCleared);
 		StateManager.Save();
 		yield return new WaitForSeconds(nightAnimationTime);
 
