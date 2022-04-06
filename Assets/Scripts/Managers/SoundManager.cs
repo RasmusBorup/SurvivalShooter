@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
         GameObject gun = GameObject.Find("GunBarrelEnd");
         GameObject player = GameObject.Find("Player");
         music.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("masterVolume") * PlayerPrefs.GetFloat("musicVolume");
-        player.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("masterVolume") * PlayerPrefs.GetFloat("enemyVolume");
+        player.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("masterVolume") * PlayerPrefs.GetFloat("playerVolume");
 
         if (gun) {
             gun.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("masterVolume") * PlayerPrefs.GetFloat("gunVolume");

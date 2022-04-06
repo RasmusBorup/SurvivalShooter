@@ -23,6 +23,7 @@ public class MainMenuManager : MonoBehaviour
 	GameObject backButton;
 	public GameObject optionsPanel;
 	Button optionsButton;
+	ArrayList saveFileButtons;
 
 	void Awake()
 	{
@@ -32,6 +33,7 @@ public class MainMenuManager : MonoBehaviour
 		optionsButton.onClick.AddListener(ShowOptions);
 		optionsPanel.GetComponentInChildren<Button>().onClick.AddListener(SaveOptions);
 		ShowMainMenu();
+		saveFileButtons = new ArrayList();
 	}
 
 	public void NewGame()
@@ -58,10 +60,15 @@ public class MainMenuManager : MonoBehaviour
 
 	public void Load()
 	{
-		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/saves");
 		buttons.SetActive(false);
 		loadButtons.SetActive(true);
 		backButton.SetActive(true);
+
+		if (saveFileButtons.Count > 0) {
+			return;
+		}
+
+		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/saves");
 		int yPosition = 250;
 
 		foreach(string file in saveFiles) {
@@ -73,6 +80,7 @@ public class MainMenuManager : MonoBehaviour
 			saveFileButton.onClick.AddListener(() => StartGame(saveName));
 
 			yPosition -= 50;
+			saveFileButtons.Add(saveFileButton);
 		}
 	}
 
@@ -85,6 +93,7 @@ public class MainMenuManager : MonoBehaviour
 		optionsPanel.transform.Find("MusicVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("musicVolume");
 		optionsPanel.transform.Find("GunVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("gunVolume");
 		optionsPanel.transform.Find("EnemyVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("enemyVolume");
+		optionsPanel.transform.Find("PlayerVolumeSlider").GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("playerVolume");
 	}
 
 	void SaveOptions()
@@ -93,6 +102,7 @@ public class MainMenuManager : MonoBehaviour
 		PlayerPrefs.SetFloat("musicVolume", optionsPanel.transform.Find("MusicVolumeSlider").GetComponentInChildren<Slider>().value);
 		PlayerPrefs.SetFloat("gunVolume", optionsPanel.transform.Find("GunVolumeSlider").GetComponentInChildren<Slider>().value);
 		PlayerPrefs.SetFloat("enemyVolume", optionsPanel.transform.Find("EnemyVolumeSlider").GetComponentInChildren<Slider>().value);
+		PlayerPrefs.SetFloat("playerVolume", optionsPanel.transform.Find("PlayerVolumeSlider").GetComponentInChildren<Slider>().value);
 
 		PlayerPrefs.Save();
 	}
