@@ -476,6 +476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeFireRateButton
       objectReference: {fileID: 0}
+    - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11457718, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Text
       value: 'Upgrade
@@ -1087,6 +1091,10 @@ PrefabInstance:
     - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Name
       value: UpgradeHealthButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11457718, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Text
@@ -3028,6 +3036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeDamageButton
       objectReference: {fileID: 0}
+    - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11457718, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Text
       value: "Upgrade \nDamage\n\nPrice:\n50"
@@ -4014,6 +4026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeMagazineSizeButton
       objectReference: {fileID: 0}
+    - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11457718, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Text
       value: "Upgrade \nMagazine\n\nPrice:\n50"
@@ -4368,6 +4384,10 @@ PrefabInstance:
     - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Name
       value: RestoreHealthButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 157720, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11457718, guid: 12bfa6c6532db9942a323ae5eac481be, type: 3}
       propertyPath: m_Text

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637838895020538358
-    m_Hash: 2248229604
+      ticks: 637849530143394487
+    m_Hash: 3107502204
   m_LockFileStatus:
     m_FilePath: D:/Spil Projekter/SurvivalShooter/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637838895020578251
-    m_Hash: 4172959495
+      ticks: 637849530143394487
+    m_Hash: 2155116132
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -185,6 +185,7 @@ m_PackageAssets:
         - 3.7.5
         - 4.0.0
         - 4.0.1
+        - 4.1.0
         compatible:
         - 0.0.3
         - 0.0.4
@@ -229,6 +230,7 @@ m_PackageAssets:
         - 3.7.5
         - 4.0.0
         - 4.0.1
+        - 4.1.0
         verified: 3.7.5
       dependencies:
       - name: com.unity.ugui
@@ -3186,6 +3188,7 @@ m_PackageAssets:
         - 1.1.0-pre.41
         - 1.1.0-pre.69
         - 1.2.0
+        - 1.3.1
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -3196,6 +3199,7 @@ m_PackageAssets:
         - 1.1.0-pre.41
         - 1.1.0-pre.69
         - 1.2.0
+        - 1.3.1
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
