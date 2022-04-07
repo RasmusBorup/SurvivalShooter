@@ -19,11 +19,11 @@ public class MainMenuManager : MonoBehaviour
 	[SerializeField]
 	Button newGameStartButton;
 	[SerializeField]
-	Button buttonPrefab;
+	GameObject buttonPrefab;
 	GameObject backButton;
 	public GameObject optionsPanel;
 	Button optionsButton;
-	ArrayList saveFileButtons;
+	int saveButtonCount = 0;
 
 	void Awake()
 	{
@@ -33,7 +33,6 @@ public class MainMenuManager : MonoBehaviour
 		optionsButton.onClick.AddListener(ShowOptions);
 		optionsPanel.GetComponentInChildren<Button>().onClick.AddListener(SaveOptions);
 		ShowMainMenu();
-		saveFileButtons = new ArrayList();
 	}
 
 	public void NewGame()
@@ -64,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
 		loadButtons.SetActive(true);
 		backButton.SetActive(true);
 
-		if (saveFileButtons.Count > 0) {
+		if (saveButtonCount > 0) {
 			return;
 		}
 
@@ -73,14 +72,19 @@ public class MainMenuManager : MonoBehaviour
 
 		foreach(string file in saveFiles) {
 			string saveName = Path.GetFileName(file);
-			Button saveFileButton = Instantiate(buttonPrefab);
+			GameObject saveFileButtonSet = Instantiate(buttonPrefab);
+			saveFileButtonSet.transform.SetParent(loadButtons.transform);
+			saveFileButtonSet.transform.localPosition = new Vector3(0, yPosition, 0);
+
+			Button saveFileButton = saveFileButtonSet.transform.Find("LoadButton").GetComponent<Button>();
 			saveFileButton.GetComponentInChildren<Text>().text = saveName;
-			saveFileButton.transform.SetParent(loadButtons.transform);
-			saveFileButton.transform.localPosition = new Vector3(0, yPosition, 0);
 			saveFileButton.onClick.AddListener(() => StartGame(saveName));
 
+			Button deleteFileButton = saveFileButtonSet.transform.Find("DeleteButton").GetComponent<Button>();
+			deleteFileButton.onClick.AddListener(() => DeleteGame(file, saveFileButtonSet));
+
 			yPosition -= 50;
-			saveFileButtons.Add(saveFileButton);
+			saveButtonCount++;
 		}
 	}
 
@@ -114,6 +118,12 @@ public class MainMenuManager : MonoBehaviour
 		newGame.SetActive(false);
 		optionsPanel.SetActive(false);
 		backButton.SetActive(false);
+	}
+
+	public void DeleteGame(string fileName, GameObject buttons)
+	{
+		File.Delete(fileName);
+		Destroy(buttons);
 	}
 
 	public void Quit()
