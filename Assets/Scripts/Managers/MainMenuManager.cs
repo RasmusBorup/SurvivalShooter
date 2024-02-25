@@ -53,7 +53,7 @@ public class MainMenuManager : MonoBehaviour
 	public void StartGame(string saveName)
 	{
 		StateManager.Load(saveName);
-		SceneManager.LoadScene ("Shop");
+		SceneManager.LoadScene("Level 01");
 		Time.timeScale = 1;
 	}
 

@@ -1,7 +1,7 @@
 [System.Serializable]
 public class SaveFile
 {
-    public int currentScore = 100;
+    public int currentScore = 0;
     public int wavesCleared = 0;
     public int shootDamageUpgrades = 0;
     public int shootSpeedUpgrades = 0;
