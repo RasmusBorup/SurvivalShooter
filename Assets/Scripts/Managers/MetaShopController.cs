@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class MetaShopController : MonoBehaviour 
 {
@@ -28,8 +30,10 @@ public class MetaShopController : MonoBehaviour
 	
 	void Start () 
 	{
-		healthButton = GameObject.Find("UpgradeHealthButton").GetComponent<Button>();
-		healthButton.gameObject.SetActive(false);
+		SetupUpgradeButton();
+		UpgradeButton test = new UpgradeButton(0, StateManager.HealthUpgrades, 50, "Health", "UpgradeHealthButton");
+		// healthButton = GameObject.Find("UpgradeHealthButton").GetComponent<Button>();
+		// healthButton.gameObject.SetActive(false);
 		fireRateButton = GameObject.Find("UpgradeFireRateButton").GetComponent<Button>();
 		fireRateButton.gameObject.SetActive(false);
 		moveSpeedButton = GameObject.Find("UpgradeMoveSpeedButton").GetComponent<Button>();
@@ -49,9 +53,9 @@ public class MetaShopController : MonoBehaviour
 		critMultiplierButton = GameObject.Find("UpgradeCritMultiplierButton").GetComponent<Button>();
 		critMultiplierButton.gameObject.SetActive(false);
 
-		UpdateButtonText(healthButton, "Health", CalculatePrice(healthPriceIncrease, StateManager.HealthUpgrades));
-		healthButton.gameObject.SetActive(true);
-		healthButton.onClick.AddListener(UpgradeHealth);
+		// UpdateButtonText(healthButton, "Health", CalculatePrice(healthPriceIncrease, StateManager.HealthUpgrades));
+		// healthButton.gameObject.SetActive(true);
+		// healthButton.onClick.AddListener(UpgradeHealth);
 
 		UpdateButtonText(fireRateButton, "Firerate", CalculatePrice(fireRatePriceIncrease, StateManager.FireRateUpgrades));
 		fireRateButton.gameObject.SetActive(true);
@@ -254,5 +258,99 @@ public class MetaShopController : MonoBehaviour
 			critMultiplierPrice += critMultiplierPriceIncrease;
 			UpdateButtonText(critMultiplierButton, "Critical Multiplier", critMultiplierPrice);
 		}
+	}
+
+	void SetupUpgradeButton()
+	{
+		// Hashtable buttonValues = new Hashtable();
+		// Hashtable healthValues = new Hashtable();
+		// healthValues.Add("levelRequirement", 0);
+		// healthValues.Add("text", "Health");
+		// healthValues.Add("buttonName", "UpgradeHealthButton");
+		// healthValues.Add("button", healthButton);
+		// healthValues.Add("priceIncrease", healthPriceIncrease);
+		// healthValues.Add("upgradeCount", StateManager.HealthUpgrades);
+		// buttonValues.Add("health", healthValues);
+
+		// Hashtable fireRateValues = new Hashtable();
+		// fireRateValues.Add("levelRequirement", 0);
+		// fireRateValues.Add("text", "Firerate");
+		// fireRateValues.Add("buttonName", "UpgradeFireRateButton");
+		// fireRateValues.Add("button", fireRateButton);
+		// fireRateValues.Add("priceIncrease", fireRatePriceIncrease);
+		// fireRateValues.Add("upgradeCount", StateManager.FireRateUpgrades);
+		// buttonValues.Add("fireRate", fireRateValues);
+
+		// Hashtable moveValues = new Hashtable();
+		// moveValues.Add("levelRequirement", 1);
+		// moveValues.Add("text", "Movement Speed");
+		// moveValues.Add("buttonName", "UpgradeMoveSpeedButton");
+		// healthValues.Add("button", moveSpeedButton);
+		// buttonValues.Add("move", moveValues);
+
+		// Hashtable magazineValues = new Hashtable();
+		// magazineValues.Add("levelRequirement", 1);
+		// magazineValues.Add("text", "Magazine");
+		// magazineValues.Add("buttonName", "UpgradeMagazineSizeButton");
+		// healthValues.Add("button", magazineSizeButton);
+		// buttonValues.Add("magazine", magazineValues);
+
+		// Hashtable damageValues = new Hashtable();
+		// damageValues.Add("levelRequirement", 2);
+		// damageValues.Add("text", "Damage");
+		// damageValues.Add("buttonName", "UpgradeDamageButton");
+		// healthValues.Add("button", damageButton);
+		// buttonValues.Add("damage", damageValues);
+
+		// Hashtable reloadValues = new Hashtable();
+		// reloadValues.Add("levelRequirement", 2);
+		// reloadValues.Add("text", "Reload Speed");
+		// reloadValues.Add("buttonName", "UpgradeReloadSpeedButton");
+		// healthValues.Add("button", reloadSpeedButton);
+		// buttonValues.Add("reload", reloadValues);
+
+		// Hashtable greedValues = new Hashtable();
+		// greedValues.Add("levelRequirement", 3);
+		// greedValues.Add("text", "Greed");
+		// greedValues.Add("buttonName", "UpgradeGreedButton");
+		// healthValues.Add("button", greedButton);
+		// buttonValues.Add("greed", greedValues);
+
+		// Hashtable regenValues = new Hashtable();
+		// regenValues.Add("levelRequirement", 4);
+		// regenValues.Add("text", "Regen");
+		// regenValues.Add("buttonName", "UpgradeRegenButton");
+		// healthValues.Add("button", regenButton);
+		// buttonValues.Add("regen", regenValues);
+
+		// Hashtable critChanceValues = new Hashtable();
+		// critChanceValues.Add("levelRequirement", 5);
+		// critChanceValues.Add("text", "Critical Chance");
+		// critChanceValues.Add("buttonName", "UpgradeCritChanceButton");
+		// healthValues.Add("button", critChanceButton);
+		// buttonValues.Add("critChance", critChanceValues);
+
+		// Hashtable critMultValues = new Hashtable();
+		// critMultValues.Add("levelRequirement", 5);
+		// critMultValues.Add("text", "Critical Multiplier");
+		// critMultValues.Add("buttonName", "UpgradeCritMultiplierButton");
+		// healthValues.Add("button", critMultiplierButton);
+		// buttonValues.Add("critMult", critMultValues);
+
+		// foreach(DictionaryEntry buttonValuePairs in buttonValues) {
+		// 	Hashtable values = (buttonValuePairs.Value as Hashtable);
+
+		// 	if (StateManager.WavesCleared < (int) values["levelRequirement"]) {
+		// 		continue;
+		// 	}
+
+		// 	Button button = (values["button"] as Button);
+		// 	button = GameObject.Find((values["buttonName"] as string)).GetComponent<Button>();
+		// 	button.gameObject.SetActive(false);
+
+		// 	UpdateButtonText(button,(values["text"] as string), CalculatePrice((int) values["priceIncrease"], (int) values["upgradeCount"]));
+		// 	button.gameObject.SetActive(true);
+		// 	button.onClick.AddListener(UpgradeHealth);
+		// }
 	}
 }

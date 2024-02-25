@@ -69,9 +69,11 @@
      <Compile Include="Assets\MobileInput\Scripts\PlatformSpecific\MobileInput.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Managers\StatsController.cs" />
      <Compile Include="Assets\MobileInput\Scripts\MobileControlRig.cs" />
      <Compile Include="Assets\Scripts\Saves\SaveFile.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Helpers\RandomAnimationPoint.cs" />
+     <Compile Include="Assets\Scripts\Models\UpgradeButton.cs" />
      <None Include="Assets\Fonts\LuckiestGuy\LICENSE.txt" />
      <None Include="Assets\Shaders\Rim Lit Bumped Specular.shader" />
     <Reference Include="UnityEngine">
