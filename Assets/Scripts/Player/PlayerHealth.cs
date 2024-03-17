@@ -1,5 +1,4 @@
-﻿using Packages.Rider.Editor.UnitTesting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
